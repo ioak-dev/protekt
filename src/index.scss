@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Montserrat|Lato|Open+Sans|Open+Sans+Condensed:300&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  .MuiInputBase-root, .MuiTypography-root {
+    color: var(--color-body-invert);
+  }
+  .MuiInputLabel-root {
+    color: var(--color-body-invert-dim);
+  }
+}
+
+.body {
+  // font-family: 'Lato', sans-serif;
+  // font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--color-body);
+  color: var(--color-body-invert);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+// 34ba9b
+// f68c70
+
+:root {
+  --height-nav: 50px;
+
+
+  --color-body: #fcfcfc;
+  --color-body-dim: #E6E6E6;
+  --color-body-invert: #252525;
+  --color-body-invert-dim: #6E6E6E;
+  --color-primary: #05a081;
+  --color-primary-alt: #1BA88C;
+  --color-secondary: #114B5F;
+  --color-secondary-alt: #265B6D;
+  --color-default: #232a34;
+  --color-default-alt: #373D46;
+  --color-white: white;
+  --color-black: black;
+  --color-success: #437A34;
+  --color-warning: #49A078;
+  --color-failure: #8C030E;
+
+  --color-nav: #232a34;
+  --color-nav-shadow: rgba(252,252,252,.15);
+  --color-nav-text: var(--color-white);
+  --color-nav-hover: rgba(145, 204, 217, 0.1);
+  --color-nav-active: var(--color-secondary);
+  --color-nav-slider: #373D46;
+  --color-navitem-mobile: var(--color-white);
+
+  --color-btn-primary-bg: var(--color-primary);
+  --color-btn-primary-bg-hover: var(--color-primary-alt);
+  --color-btn-secondary-bg: var(--color-secondary);
+  --color-btn-secondary-bg-hover: var(--color-secondary-alt);
+  --color-btn-default-bg: var(--color-default);
+  --color-btn-default-bg-hover: var(--color-default-alt);
+  --color-btn-invert-bg: var(--color-body);
+  --color-btn-invert-bg-hover: var(--color-body-dim);
+
+  --color-btn-fg-dark: black;
+  --color-btn-fg-light: white;
+
+  --color-btn-action-danger-bg: #B33951;
+
+  --color-dialog: var(--color-body);
+}
+
+
+
+// /* Color Theme Swatches in Hex */
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-1-hex { color: #0F2F59; }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-2-hex { color: #1F4C73; }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-3-hex { color: #3A6D8C; }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-4-hex { color: #75AABF; }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-5-hex { color: #9CD3D9; }
+
+// /* Color Theme Swatches in RGBA */
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-1-rgba { color: rgba(15, 47, 89, 1); }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-2-rgba { color: rgba(30, 75, 114, 1); }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-3-rgba { color: rgba(57, 108, 140, 1); }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-4-rgba { color: rgba(116, 170, 191, 1); }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-5-rgba { color: rgba(156, 210, 216, 1); }
+
+// /* Color Theme Swatches in HSLA */
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-1-hsla { color: hsla(213, 70, 20, 1); }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-2-hsla { color: hsla(208, 57, 28, 1); }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-3-hsla { color: hsla(202, 41, 38, 1); }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-4-hsla { color: hsla(196, 36, 60, 1); }
+// .Vintage-blue-background.-Rough-painted-wall-of-sapphire-color.-Imperfect-plane-of-blue-colored.-Uneven-old-decorative-toned-backdrop-of-cyan-tint.-Texture-of-sapphirine-hue.-Ornamental-stony-surface.-5-hsla { color: hsla(185, 44, 73, 1); }

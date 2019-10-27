@@ -1,0 +1,36 @@
+.search-bar {
+    display: flex;
+    flex: 1 1 100%;
+    max-width: 100%;
+    // margin: 5vh 10vw 0px 10vw;
+    
+
+    button {
+        &.icon {
+            background: #fff;
+            color: #1a1a1a;
+            min-width: 40px;
+            font-weight: 300;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0px 3px 3px 0px;
+            font-size: 16px;
+            text-align: center;
+            white-space: nowrap;
+            padding: 14.4px 24px;
+            // line-height: 25px;
+            // padding: 14.4px 16px;
+
+            &::before, &::after {
+            box-sizing: border-box;
+            }
+        }
+    }
+
+    input {
+        // z-index: 0;
+        border-radius: 3px 0px 0px 3px;
+    }
+}
