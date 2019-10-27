@@ -1,25 +1,207 @@
 .home {
-    .search-bar {
-        display: flex;
-        flex: 1 1 100%;
-        max-width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 2.2px;
 
-        input {
-            z-index: 0;
+    .section {
+        /* Needed for children to be absolutely positioned relative to the parent. */
+        position: relative;
+        height: 100vh;
+
+        /* For text formatting. */
+        display: grid;
+        color: var(--color-white);
+        align-content: center;
+
+        @media (max-width: 767px) {
+            font-size: 1rem;
         }
 
-        margin: 5vh 10vw 0px 10vw;
-    }
+        @media (min-width: 768px) {
+            font-size: 1.5rem;
+        }
 
-    .cover {
-        overflow: hidden;
-        // position: absolute;
-        margin-top: calc(0px - var(--height-nav));
-        img {
-            width: 100%;
+        &.parallax::after {
+            /* Display and position the pseudo-element */
+            content: " ";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+          
+            /* Move the pseudo-element back away from the camera,
+             * then scale it back up to fill the viewport.
+             * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
+            transform: translateZ(-1px) scale(1.5);
+            /* Force the background image to fill the whole element. */
+            background-size: 100%;
+            /* Keep the image from overlapping sibling elements. */
+            z-index: -1;
+        }
+
+        &.static {
+            height: 55vh;
+
+            a {
+                text-decoration: none;
+                color: var(--color-primary);
+                font-weight: bold;
+            }
+
             @media (max-width: 767px) {
-                width: 200%;
+                padding-left: 1em;
+                padding-right: 1em;
+            }
+
+            @media (min-width: 768px) {
+                &.odd {
+                    justify-content: right;
+                    padding-right: 50px;
+                }
+
+                &.even {
+                    justify-content: left;
+                    padding-left: 50px;
+                }
+            }
+            
+            &.bg1 {
+                background: #388d7f; //713f54 9b2b41
+            }
+            
+            &.bg2 {
+                background: rgb(30, 109, 182);
+            }
+            
+            &.bg3 {
+                background: #78583c;
+            }
+            
+            &.bg4 {
+                background: #65561D;
+            }
+            
+            &.bg5 {
+                background: #721f0d;
+            }
+            
+            &.bg6 {
+                background: #01a982;
+            }
+            
+            &.bg7 {
+                background: #45718c; //dd7568
+            }
+            
+            &.bg8 {
+                background: #0a3b5a;
             }
         }
-    }
+
+        &.developers {
+
+            height: auto;
+            // min-height: 100vh;
+            padding-top: 1em;
+            padding-bottom: 1em;
+
+            .headline {
+                display: flex;
+                font-size: 1.6em;
+                justify-content: center;
+            }
+            
+            .container {                    
+                display: grid;
+                
+                @media (min-width: 768px) {
+                    grid-template-columns: 1fr 1fr;
+                }
+                @media (max-width: 767px) {
+                    grid-template-columns: 1fr;
+                }
+
+                img {
+                    border-radius: 50%;
+                    width: 10em;
+                }
+
+                .contact {
+                    display: grid;
+                    justify-items: center;
+                    padding-top: 2em;
+                    padding-bottom: 2em;
+
+                    .name {
+                        font-size: 2em;
+                    }
+
+                    .tag {
+                        font-size: 1.2em;
+                        color: var(--color-secondary);
+                    }
+
+                    .description {
+                        padding-top: 1em;
+                        width: 60%;
+                        font-size: 0.8em;
+                        text-align: justify;
+
+                        @media (max-width: 767px) {
+                            width: 90%;
+                        }
+                    }
+                }
+            }
+        }
+
+        &.parallax {
+            &.bg1::after {
+                background: url('../../images/home_bg1.jpg') no-repeat center center;
+                background-size: cover;
+            }
+            
+            &.bg2::after {
+                background: url('../../images/home_bg2.jpg') no-repeat center center;
+                background-size: cover;
+            }
+            
+            &.bg3::after {
+                background: url('../../images/home_bg3.jpg') no-repeat center center;
+                background-size: cover;
+            }
+            
+            &.bg4::after {
+                background: url('../../images/home_bg4.jpg') no-repeat center center;
+                background-size: cover;
+            }
+            
+            &.bg5::after {
+                background: url('../../images/home_bg5.jpg') no-repeat center center;
+                background-size: cover;
+            }
+            
+            &.bg6::after {
+                background: url('../../images/home_bg6.jpg') no-repeat center center;
+                background-size: cover;
+            }
+            
+            &.bg7::after {
+                background: url('../../images/home_bg7.jpg') no-repeat center center;
+                background-size: cover;
+            }
+            
+            &.bg8::after {
+                background: url('../../images/home_bg8.jpg') no-repeat center center;
+                background-size: cover;
+            }
+        }
 }
+}
+
+
+  
+  

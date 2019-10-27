@@ -1,41 +1,37 @@
-button {
 
-  // font-family: 'Open Sans Condensed', sans-serif;
-  font-family: 'Open Sans', sans-serif;
-  // font-size: 10px;
+button {
   
-  border-radius: 3px;
+  border-radius: 100px;
 
   // Initialize colors based on theme
   &.default {
     --color-bg: var(--color-btn-default-bg);
-    --color-bg-hover: var(--color-btn-default-bg-hover);
-  }
-
-  &.invert {
-    --color-bg: var(--color-btn-invert-bg);
-    --color-bg-hover: var(--color-btn-invert-bg-hover);
+    --color-fg: var(--color-btn-default-fg);
+    --color-fg-hover: var(--color-btn-default-fg-hover);
   }
 
   &.primary {
     --color-bg: var(--color-btn-primary-bg);
-    --color-bg-hover: var(--color-btn-primary-bg-hover);
+    --color-fg: var(--color-btn-primary-fg);
+    --color-fg-hover: var(--color-btn-primary-fg-hover);
   }
 
   &.secondary {
     --color-bg: var(--color-btn-secondary-bg);
-    --color-bg-hover: var(--color-btn-secondary-bg-hover);
+    --color-fg: var(--color-btn-secondary-fg);
+    --color-fg-hover: var(--color-btn-secondary-fg-hover);
+  }
+
+  &.tertiary {
+    --color-bg: var(--color-btn-tertiary-bg);
+    --color-fg: var(--color-btn-tertiary-fg);
+    --color-fg-hover: var(--color-btn-tertiary-fg-hover);
   }
 
   background: none;
   outline: none;
-  color: var(--color-btn-fg-light);
-  
-  &.alt {
-    color: var(--color-btn-fg-dark);
-  }
-
-  // text-transform: uppercase;
+  color: var(--color-fg) !important;
+  text-transform: uppercase;
   cursor: pointer;
   // transition: .4s cubic-bezier(.5,1.6,.4,.7);
   position: relative;
@@ -76,50 +72,17 @@ button {
     }
   }
 
-  &.invert {
-    color: var(--color-btn-fg-dark);
-
-    &.alt {
-      color: var(--color-btn-fg-light);
-    }
-  }
-
   &.animate {
-    color: var(--color-btn-fg-light);
-    &.alt {
-      color: var(--color-btn-fg-dark);
-    }
     &:hover {
-      color: var(--color-btn-fg-light);
-      background-color: var(--color-bg-hover);
-      border: 2px solid var(--color-bg-hover);
+      color: var(--color-fg-hover) !important;
+      background-color: var(--color-bg) !important;
       transition: 0.2s cubic-bezier(.5,1.6,.4,.7);
-    }
-
-    &.invert {
-      color: var(--color-btn-fg-dark);
-  
-      &.alt {
-        color: var(--color-btn-fg-light);
-      }
     }
   }
 
   &.block {
-    color: var(--color-btn-fg-light);
-    background-color: var(--color-bg);
-    &:hover {
-      background-color: var(--color-bg-hover);
-      border: 2px solid var(--color-bg-hover);
-    }
-
-    &.invert {
-      color: var(--color-btn-fg-dark);
-  
-      &.alt {
-        color: var(--color-btn-fg-light);
-      }
-    }
+    color: var(--color-fg-hover) !important;
+    background-color: var(--color-bg) !important;
   }
 
   .material-icons {

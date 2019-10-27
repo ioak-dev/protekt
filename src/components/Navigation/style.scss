@@ -5,7 +5,6 @@
     $signinIconHeight: 25px;
 
     font-family: 'Open Sans', sans-serif;
-    // font-family: 'Open Sans Condensed', sans-serif;
 
     .navbar {
 
@@ -55,7 +54,7 @@
         .links {
             display: flex;
             a {
-                color: var(--color-body-dim);
+                color: var(--color-body-invert-dim);
                 position: relative;
                 transition: all .5s;
                 text-decoration: none;
@@ -66,10 +65,10 @@
                 text-transform: uppercase;
 
                 &.active {
-                    color: var(--color-body);
+                    color: var(--color-body-invert);
 
                     &::after {
-                        width: 95%;
+                        width: 65%;
                         background: var(--color-primary);
                         // height: 4px;
                         transition: all .3s cubic-bezier(.7,0,.3,1);
@@ -94,6 +93,7 @@
                     bottom: -20%;
                     left: 0;
                     right: 0;
+                    border-radius: 100%;
                     margin: auto;
                     width: 0%;
                     content: '.';
@@ -135,7 +135,7 @@
             .menu:after,
             .menu:before,
             .menu div {
-                background-color: var(--color-body);
+                background-color: var(--color-body-invert);
                 border-radius: 3px;
                 content: '';
                 display: block;
@@ -190,7 +190,7 @@
                 align-content: center;
                 a {
                     text-decoration: none;
-                    color: var(--color-body);
+                    color: var(--color-body-invert);
                     font-size: 1.5em;
                     padding: 10px;
 
@@ -293,7 +293,7 @@
             cursor: pointer;
 
             &.color-1 {
-                background-color: var(--color-themecolor-1);
+                background-image: var(--color-themecolor-1);
             }
 
             &.color-2 {

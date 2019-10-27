@@ -1,0 +1,63 @@
+.arc-select {
+    .max-width-50 {
+        max-width: 50px;
+    }
+    .max-width-100 {
+        max-width: 100px;
+    }
+    .max-width-150 {
+        max-width: 150px;
+    }
+    .max-width-200 {
+        max-width: 200px;
+    }
+    .max-width-250 {
+        max-width: 250px;
+    }
+    .max-width-300 {
+        max-width: 300px;
+    }
+
+    .palette-1 {
+        display: inline-block;
+        padding: 6px;
+        font-size: 14px;
+        border-radius: 4px;
+        background-color: var(--color-body);
+        margin-left: 10px;
+        min-width: 14px;
+        text-align: center;
+        height: 14px;
+        line-height: 14px;
+    }
+}
+
+
+.select-palette {
+    display: inline-block;
+    padding: 6px;
+    border-radius: 4px;
+    width: 12px;
+    text-align: center;
+    height: 12px;
+    line-height: 12px;
+
+    &.one {
+        background-color: #448C30;
+    }
+    &.two {
+        background-color: #F2E205;
+    }
+    &.three {
+        background-color: #DD403A;
+    }
+    &.four {
+        background-color: #970FF2;
+    }
+    &.five {
+        background-color: #0597F2;
+    }
+    &.six {
+        background-color: #F2309B;
+    }
+}

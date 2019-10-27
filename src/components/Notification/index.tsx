@@ -47,33 +47,6 @@ class Notification extends Component<Props, State> {
         });
     }
 
-    processNextProps(nextProps) {
-        if (nextProps.event && nextProps.event.name === 'spinner') {
-            this.setState({
-                spinner: nextProps.event.signal
-            })
-        }
-
-        if (nextProps.event && nextProps.event.name === 'notification') {
-            if (!nextProps.event.signal) {
-                this.setState({
-                    notification: null,
-                })
-            } else {
-                this.setState({
-                    notification: nextProps.event.data,
-                    spinner: false
-                })
-                
-                if (nextProps.event.data.duration) {
-                    setTimeout(() => {
-                        // this.props.sendEvent('notification', false);
-                    }, nextProps.event.data.duration);
-                }
-            }
-        }
-    }
-
     render() {
         return (
             <>

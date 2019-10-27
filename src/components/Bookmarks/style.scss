@@ -1,0 +1,44 @@
+.bookmarks {
+    .form {
+        width: 100%;
+    }
+
+    .tag {
+        cursor: pointer;
+        background-color: var(--color-body-dim);
+        display: inline;
+        margin-right: 10px;
+        padding: 0px 4px 2px 4px;
+        border-radius: 50px;
+        text-align: center;
+        vertical-align: center;
+    }
+
+    .action-icon {
+        cursor: pointer;
+        display: inline;
+        padding-left: 10px;
+        color: var(--color-primary);
+        color: var(--color-body-invert-dim);
+
+        .material-icons {
+          vertical-align: middle;
+          margin-right: 5px;
+          font-size: 1em
+        }
+    }
+
+    .section-main {
+        .content {
+            // padding: 20px;
+        }
+    }
+
+    .url, .title {
+        word-break: break-word;
+    }
+
+    .timestamp {
+        color: var(--color-body-invert-dim);
+    }
+}

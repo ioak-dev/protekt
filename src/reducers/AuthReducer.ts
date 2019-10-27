@@ -2,8 +2,9 @@ import { GET_AUTH, ADD_AUTH, REMOVE_AUTH } from '../actions/types';
 
 const initialState = {
     isAuth: false,
-    firstname: '',
-    lastname: ''
+    token: '',
+    secret: '',
+    name: ''
 }
 
 export default function(state = initialState, action) {
@@ -19,14 +20,14 @@ export default function(state = initialState, action) {
                 ...state,
                 ...action.payload
             };
-        
         case REMOVE_AUTH:
             console.log('REMOVE_AUTH reducer');
             return {
                 ...state,
                 isAuth: false,
-                firstname: '',
-                lastname: ''
+                token: '',
+                secret: '',
+                name: ''
             };
         default:
             return state;

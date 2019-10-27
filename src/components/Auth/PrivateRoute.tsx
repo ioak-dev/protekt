@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getAuth } from '../../actions/AuthActions';
 import { Authorization } from '../Types/GeneralTypes';
@@ -23,8 +23,8 @@ class PrivateRoute extends Component<Props, State> {
   render() {
     return (
       <>
-        {this.props.authorization.isAuth && <Route path={this.props.path} component={this.props.render} />}
-        {!this.props.authorization.isAuth && <Redirect to={{pathname: "/home"}} />}
+        {this.props.authorization.isAuth && <Route path={this.props.path} render={this.props.render} />}
+        {/* {!this.props.authorization.isAuth && <Redirect to={{pathname: "/login"}} />} */}
       </>
     );
   }

@@ -1,4 +1,4 @@
-import { GET_AUTH, REMOVE_AUTH, ADD_AUTH } from './types';
+import { GET_AUTH, REMOVE_AUTH, ADD_AUTH } from '../actions/types';
 
 export const getAuth = () => dispatch => {
     dispatch({

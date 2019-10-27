@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { receiveMessage } from '../../events/MessageService';
-import { Message } from '../Types/GeneralTypes';
 
 interface Props {
 }
@@ -21,21 +20,14 @@ class Backdrop extends Component<Props, State> {
         receiveMessage().subscribe(
             message => {
                 if (message.name === 'dialog') {
-
+                    if (message.signal) {
+                        this.setState({backdrop: 'backdrop-fade'});
+                    } else {
+                        this.setState({backdrop: ''});
+                    }
                 }
             }
         )
-        // if (nextProps.event && nextProps.event.name === 'dialog') {
-        //     if (nextProps.event.signal) {
-        //         this.setState({
-        //             backdrop: 'backdrop-fade'
-        //         })
-        //     } else {
-        //         this.setState({
-        //             backdrop: ''
-        //         })
-        //     }
-        // }
     }
 
     render() {
