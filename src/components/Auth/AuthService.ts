@@ -49,7 +49,7 @@ export function signin(data, problem) {
     }
 }
 
-export function updateUserDetails(data, token, type) {
+export function updateUserDetails(data, authorization, type) {
     return httpGet(constants.API_URL_PRESIGNUP, null)
         .then(function(response) {
             if (response.status === 200) {
@@ -69,9 +69,9 @@ export function updateUserDetails(data, token, type) {
                 return httpPut(constants.API_URL_USER_DETAILS, newData,
                     {
                         headers: {
-                            Authorization: 'Bearer ' + token
+                            Authorization: 'Bearer ' + authorization.token
                         }
-                    })
+                    }, authorization.password)
                     .then(function(response) {
                         return Promise.resolve(response);
                     })

@@ -8,7 +8,6 @@ import { HashRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import Login from '../Auth/Login';
 import PrivateRoute from '../Auth/PrivateRoute';
 import AuthInit from '../Auth/AuthInit';
-import { withCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import { getAuth, addAuth, removeAuth } from '../../actions/AuthActions';
 import { getProfile } from '../../actions/ProfileActions';
@@ -48,7 +47,6 @@ interface Props {
     getAuth: Function,
     addAuth: Function,
     removeAuth: Function,
-    cookies: any,
     history: any,
 
     // event: PropTypes.object,
@@ -71,10 +69,6 @@ class Content extends Component<Props, State> {
     
     logout = (event, type = 'success', message = 'You have been logged out') => {
         this.props.removeAuth();
-        this.props.cookies.remove('isAuth');
-        this.props.cookies.remove('token');
-        this.props.cookies.remove('secret');
-        this.props.cookies.remove('name');
         sendMessage('notification', true, {type: type, message: message, duration: 3000});
         sendMessage('loggedout', true);
     }
@@ -84,7 +78,7 @@ class Content extends Component<Props, State> {
             <div className={"App " + this.props.profile.theme + " " + this.props.profile.textSize + " " + this.props.profile.themeColor}>
                 
                 <HashRouter>
-                    <AuthInit />
+                    <AuthInit {...this.props} />
                     <Backdrop />
                     <div className="body">
                         <div className="body-content">
@@ -97,7 +91,7 @@ class Content extends Component<Props, State> {
                                 <Route path="/reset" render={(props) => <ResetPassword {...props} {...this.props} logout={() => this.logout}/>} />
                                 <PrivateRoute path="/bookmarks" render={(props) => <Bookmarks {...props} {...this.props} logout={this.logout} />} />
                                 <PrivateRoute path="/notes" render={(props) => <Notes {...props} {...this.props} logout={() => this.logout} />} />
-                                <Route path="/settings" render={(props) => <Settings {...props} {...this.props} logout={() => this.logout}/>} />
+                                <PrivateRoute path="/settings" render={(props) => <Settings {...props} {...this.props} logout={() => this.logout}/>} />
                             </MuiThemeProvider>
                         </div>
                     </div>
@@ -112,4 +106,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 })
 
-export default connect(mapStateToProps, { getAuth, addAuth, removeAuth, getProfile })(withCookies(Content));
+export default connect(mapStateToProps, { getAuth, addAuth, removeAuth, getProfile })(Content);

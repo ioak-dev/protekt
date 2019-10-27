@@ -121,7 +121,7 @@ class Bookmarks extends Component<Props, State> {
                 headers: {
                     Authorization: 'Bearer ' + authorization.token
                 }
-            })
+            }, authorization.password)
             .then(function(response) {
                 that.setState({items: response.data, view: response.data});
                 if (that.state.isFiltered) {
@@ -263,7 +263,7 @@ class Bookmarks extends Component<Props, State> {
             headers: {
                 Authorization: 'Bearer ' + this.props.authorization.token
             }
-        })
+        }, this.props.authorization.password)
         .then(function(response) {
             if (response.status === 201) {
                 sendMessage('notification', true, {type: 'success', message: 'Bookmark created', duration: 5000});

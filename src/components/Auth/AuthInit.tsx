@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAuth, addAuth, removeAuth } from '../../actions/AuthActions';
-import {withCookies, ReactCookieProps} from 'react-cookie';
 import { Authorization } from '../Types/GeneralTypes';
 
-interface Props extends ReactCookieProps {
+interface Props {
     authorization: Authorization,
     addAuth: Function,
     getAuth: Function,
-    removeAuth: Function,
-    cookies: any
+    removeAuth: Function
 }
 
 interface State {
@@ -18,13 +16,8 @@ interface State {
 
 class AuthInit extends Component<Props, State> {
     componentWillMount() {
-        if (!this.props.authorization.isAuth && this.props.cookies.get('isAuth')) {
-            this.props.addAuth({
-                isAuth: true,
-                token: this.props.cookies.get('token'),
-                secret: this.props.cookies.get('secret'),
-                name: this.props.cookies.get('name')
-            });
+        if (!this.props.authorization.isAuth) {
+            console.log(this.props);
         }
         this.props.getAuth();
     }
@@ -40,4 +33,4 @@ const mapStateToProps = state => ({
     authorization: state.authorization
 })
 
-export default connect(mapStateToProps, { getAuth, addAuth, removeAuth })(withCookies(AuthInit));
+export default connect(mapStateToProps, { getAuth, addAuth, removeAuth })(AuthInit);

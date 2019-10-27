@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router'
 import { getProfile, setProfile, reloadProfile } from '../../actions/ProfileActions';
-import {withCookies} from 'react-cookie';
 
 import './style.scss';
 import Desktop from './Desktop';
@@ -27,7 +26,6 @@ interface Props {
     logout: Function,
     toggleSettings: any,
     history: any,
-    cookies: any,
     location: any,
     match: any
 }
@@ -79,7 +77,7 @@ class Navigation extends Component<Props, State> {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.state.firstLoad && nextProps.authorization && nextProps.authorization.isAut) {
+        if (this.state.firstLoad && nextProps.authorization && nextProps.authorization.isAuth) {
             this.props.reloadProfile(nextProps.authorization);
             this.setState({
                 firstLoad: false
@@ -170,4 +168,4 @@ const mapStateToProps = state => ({
     profile: state.profile
 })
 
-export default connect(mapStateToProps, { getProfile, setProfile, reloadProfile })(withCookies(withRouter(Navigation)));
+export default connect(mapStateToProps, { getProfile, setProfile, reloadProfile })(withRouter(Navigation));

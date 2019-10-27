@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './Sidebar.scss';
 import { sendMessage, receiveMessage } from '../../events/MessageService';
-import { Subject, Observable } from 'rxjs';
-import { Message } from '../Types/GeneralTypes';
 
 interface Props {
     show?: boolean,
@@ -19,6 +17,8 @@ interface State {
 }
 
 class Sidebar extends Component<Props, State> {
+
+    _isMounted = false;
 
     constructor(props) {
         super(props);
@@ -41,13 +41,20 @@ class Sidebar extends Component<Props, State> {
     }
 
     componentDidMount() {
+        this._isMounted = true;
         receiveMessage().subscribe(message => {
-            if (message.name === 'sidebarExpanded' && message.signal && message.data && message.data.label !== this.props.label) {
-                this.setState({
-                    show: false
-                })
+            if (this._isMounted) {
+                if (message.name === 'sidebarExpanded' && message.signal && message.data && message.data.label !== this.props.label) {
+                    this.setState({
+                        show: false
+                    })
+                }
             }
         })
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {

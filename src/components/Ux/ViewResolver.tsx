@@ -15,6 +15,8 @@ interface State {
 }
 
 class ViewResolver extends Component<Props, State> {
+
+    _isMounted = false;
     
     viewPort = window.matchMedia("(max-width: 767px)");
 
@@ -38,16 +40,23 @@ class ViewResolver extends Component<Props, State> {
     }
 
     componentDidMount() {
+        this._isMounted = true;
         this.viewPortChange(this.viewPort);
         this.viewPort.addListener(this.viewPortChange);
 
         receiveMessage().subscribe(message => {
-            if (message.name === 'sidebar') {
-                this.setState({
-                    showSide: message.signal
-                })
+            if (this._isMounted) {
+                if (message.name === 'sidebar') {
+                    this.setState({
+                        showSide: message.signal
+                    })
+                }
             }
         })
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     initializeViews() {

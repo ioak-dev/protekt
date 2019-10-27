@@ -48,6 +48,7 @@ interface State {
     showFilter: boolean,
     sortBy: string,
     sortOrder: string,
+    flag: string,
 
     searchPref: {
         title: boolean,
@@ -85,6 +86,7 @@ class Notes extends Component<Props, State> {
             sortBy: 'last modified',
             sortOrder: 'descending',
             firstLoad: true,
+            flag: '',
 
             showFilter: false,
             searchtext: '',
@@ -176,7 +178,7 @@ class Notes extends Component<Props, State> {
                 headers: {
                     Authorization: 'Bearer ' + authorization.token
                 }
-            })
+            }, authorization.password)
             .then(function(response) {
                 that.setState({items: response.data, searchResults: response.data, view: response.data});
                 if (that.state.isFiltered) {
@@ -377,6 +379,7 @@ class Notes extends Component<Props, State> {
             title: this.state.title,
             content: this.state.content,
             tags: this.state.tags,
+            flag: this.state.flag,
             notebook: notebook
         });
     }
@@ -434,7 +437,7 @@ class Notes extends Component<Props, State> {
             headers: {
                 Authorization: 'Bearer ' + this.props.authorization.token
             }
-        }, ['attributes'])
+        }, this.props.authorization.password, ['attributes'])
         .then(function(response) {
             if (response.status === 201) {
                 if (edit) {

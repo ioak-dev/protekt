@@ -2,7 +2,8 @@ export interface Authorization {
     isAuth: boolean,
     token?: string,
     firstname?: string,
-    lastname?: string
+    lastname?: string,
+    password?: string
 }
 
 export interface Profile {

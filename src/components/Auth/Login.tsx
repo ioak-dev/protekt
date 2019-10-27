@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAuth, addAuth, removeAuth } from '../../actions/AuthActions';
-import { withCookies } from 'react-cookie';
 import './Login.scss';
 import ArcTextField from '../Ux/ArcTextField';
 import {signup, signin, sentPasswordChangeEmail, preSignup, preSignin} from './AuthService';
@@ -15,7 +14,6 @@ interface Props {
     getAuth: Function,
     addAuth: Function,
     removeAuth: Function,
-    cookies: any,
     history: any,
     location: any,
     authorization: Authorization
@@ -67,7 +65,7 @@ class Login extends Component<Props, State> {
                         .then((response) => {
                             if (response.status === 200) {
                                 sendMessage('notification', true, {message: 'Signed In successfully', type: 'success', duration: 3000});
-                                this.success(response.data);
+                                this.success(response.data, this.state.password);
                             } else if (response.status === 401) {
                                 sendMessage('notification', true, {message: 'Incorrect passphrase', type: 'failure', duration: 3000});
                             } else {
@@ -165,21 +163,17 @@ class Login extends Component<Props, State> {
         )
     }
 
-    success = (data) => {
+    success = (data, password) => {
         this.props.addAuth({
             isAuth: true,
             token: data.token,
             secret: data.secret,
-            name: data.name
+            name: data.name,
+            email: data.email,
+            password: password
         });
         sendMessage('loggedin', true);
-        this.props.cookies.set('isAuth', true);
-        this.props.cookies.set('token', data.token);
-        this.props.cookies.set('secret', data.secret);
-        this.props.cookies.set('name', data.name);
-        this.props.cookies.set('email', data.email);
-        this.props.history.push("/bookmarks");
-        // this.props.history.push("/notes");
+        this.props.history.push("/home");
     }
 
     toggle = () => {
@@ -233,4 +227,4 @@ const mapStateToProps = state => ({
     authorization: state.authorization
 })
 
-export default connect(mapStateToProps, { getAuth, addAuth, removeAuth })(withCookies(Login));
+export default connect(mapStateToProps, { getAuth, addAuth, removeAuth })(Login);

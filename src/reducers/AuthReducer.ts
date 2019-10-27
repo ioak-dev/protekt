@@ -4,7 +4,8 @@ const initialState = {
     isAuth: false,
     token: '',
     secret: '',
-    name: ''
+    name: '',
+    password: ''
 }
 
 export default function(state = initialState, action) {
@@ -27,7 +28,8 @@ export default function(state = initialState, action) {
                 isAuth: false,
                 token: '',
                 secret: '',
-                name: ''
+                name: '',
+                password: ''
             };
         default:
             return state;

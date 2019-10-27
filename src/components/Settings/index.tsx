@@ -5,7 +5,6 @@ import View from '../Ux/View';
 import ViewResolver from '../Ux/ViewResolver';
 import { Switch } from '@material-ui/core';
 import { connect } from 'react-redux';
-import {withCookies} from 'react-cookie';
 import {importBookmarks} from '../Bookmarks/BookmarkService';
 import ArcTextField from '../Ux/ArcTextField';
 import { isEmptyOrSpaces } from '../Utils';
@@ -21,8 +20,7 @@ interface Props {
   getProfile: Function,
   setProfile: Function,
   persistProfile: Function,
-  authorization: Authorization,
-  cookies: any
+  authorization: Authorization
 }
 
 interface State {
@@ -50,8 +48,8 @@ class Settings extends React.Component<Props, State> {
 
   componentDidMount() {
     this.setState({
-      name: this.props.cookies.get('name'),
-      email: this.props.cookies.get('email')
+      // name: this.props.cookies.get('name'),
+      // email: this.props.cookies.get('email')
     })
   }
 
@@ -162,14 +160,14 @@ class Settings extends React.Component<Props, State> {
       name: this.state.name,
       email: this.state.email,
       password: this.state.newPassword
-    }, this.props.authorization.token, type)
+    }, this.props.authorization, type)
     .then((response: any) => {
       if (response.status === 201) {
         if (type === 'password') {
           sendMessage('notification', true, {message: 'Password updated successfully', type: 'success', duration: 3000});
         } else{
-          this.props.cookies.set('name', this.state.name);
-          this.props.cookies.set('email', this.state.email);
+          // this.props.cookies.set('name', this.state.name);
+          // this.props.cookies.set('email', this.state.email);
           sendMessage('notification', true, {message: 'User account updated successfully', type: 'success', duration: 3000});
         }
       } else {
@@ -205,7 +203,7 @@ class Settings extends React.Component<Props, State> {
           headers: {
             Authorization: 'Bearer ' + that.props.authorization.token
           }
-        })
+        }, that.props.authorization.password)
         .then(function(response) {
           let staticContent = '<META HTTP-EQUIV="Content-Type" CONTENT="text/html;' +
               ' charset=UTF-8"><TITLE>Bookmarks</TITLE><H1>Bookmarks</H1>';
@@ -311,4 +309,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 })
 
-export default connect(mapStateToProps, { getProfile, setProfile, persistProfile })(withCookies(Settings));
+export default connect(mapStateToProps, { getProfile, setProfile, persistProfile })(Settings);

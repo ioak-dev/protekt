@@ -14,7 +14,7 @@ export const reloadProfile = (authorization) => dispatch => {
             headers: {
                 Authorization: 'Bearer ' + authorization.token
             }
-        })
+        }, authorization.password)
         .then(function(response) {
             console.log(response);
             dispatch({
@@ -31,7 +31,7 @@ export const persistProfile = (authorization, payload) => dispatch => {
             headers: {
                 Authorization: 'Bearer ' + authorization.token
             }
-        })
+        }, authorization.password)
         .then(function(response) {
             dispatch({
                 type: SET_PROFILE,
