@@ -29,23 +29,23 @@ export default class Home extends React.Component<Props, State> {
     return (
       <>
         <div className="home">
-          <div className="section parallax bg1" />
+          {/* <div className="section parallax bg1" />
           <div className="section static bg1 odd">
             <h3>A bookmarking app like never before</h3>
             <p>Take your link to the web wherever you go, with the most secure bookmark and note taking app</p>
             <br />
             <p><NavLink to="/login" className="navitem" activeClassName="active">Sign up</NavLink>&nbsp;for free</p>
-          </div>
+          </div> */}
 
           <div className="section parallax bg bg2" />
           <div className="section static bg2 even">
-            <h3>Secure by design</h3>
+            <h3>Secured suite of applications</h3>
             <p>Designed with security as a primary factor from ground up</p>
             <p>Your passwords never leaves your workstation</p>
             <p>Our servers have zero knowledge about your password</p>
           </div>
 
-          <div className="section parallax bg3" />
+          {/* <div className="section parallax bg3" />
           <div className="section static bg3 odd">
             <h3>Premium features</h3>
             <p>Get premium features free for lifetime. We standby free software for all</p>
@@ -73,7 +73,7 @@ export default class Home extends React.Component<Props, State> {
           <div className="section static bg7 odd">
             <h3>Travel to the future</h3>
             <p>We are evolving for the future. More features on the way. You can watch our roadmap here</p>
-          </div>
+          </div> */}
         </div>
       </>
     );
