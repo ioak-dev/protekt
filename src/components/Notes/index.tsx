@@ -11,7 +11,6 @@ import './style.scss';
 import NoteRef from './NoteRef';
 import { isEmptyOrSpaces, match, sort } from '../Utils';
 import ArcSelect from '../Ux/ArcSelect';
-import Artboard from './Artboard';
 import Sidebar from '../Ux/Sidebar';
 
 import { sendMessage, receiveMessage } from '../../events/MessageService';
@@ -36,7 +35,6 @@ interface State {
     title: string,
     tags: string,
     isAddDialogOpen: boolean,
-    isArtboardAddDialogOpen: boolean,
     firstLoad: boolean,
     selectedNoteId?: string,
     content: string,
@@ -71,7 +69,6 @@ class Notes extends Component<Props, State> {
             searchResults: [],
             view: [],
             isAddDialogOpen: false,
-            isArtboardAddDialogOpen: false,
 
             selectedNoteId: '',
 
@@ -103,11 +100,6 @@ class Notes extends Component<Props, State> {
                         label: 'New Note',
                         action: this.newNote,
                         icon: 'note_add'
-                    },
-                    {
-                        label: 'New Whiteboard',
-                        action: this.newArtboard,
-                        icon: 'tv'
                     }
                 ]
             }
@@ -208,11 +200,6 @@ class Notes extends Component<Props, State> {
         sendMessage('sidebar', false);
     }
 
-    newArtboard = () => {
-        this.toggleArtboardAddDialog();
-        sendMessage('sidebar', false);
-    }
-
     toggleAddDialog = () => {
         this.setState({
             isAddDialogOpen: !this.state.isAddDialogOpen,
@@ -231,17 +218,9 @@ class Notes extends Component<Props, State> {
         })
     }
 
-    toggleArtboardAddDialog = () => {
-        this.setState({
-            isArtboardAddDialogOpen: !this.state.isArtboardAddDialogOpen,
-        });
-        this.resetForm();
-    }
-
     closeAllDialog = () => {
         this.setState({
             isAddDialogOpen: false,
-            isArtboardAddDialogOpen: false
         });
         this.resetForm();
     }
@@ -384,22 +363,6 @@ class Notes extends Component<Props, State> {
         });
     }
 
-    saveArtboardEvent = () => {
-        let notebook = this.state.existingNotebook;
-        if (notebook === '<create new>') {
-            notebook = this.state.newNotebook;
-        }
-        this.saveNote({
-            id: null,
-            type: 'Artboard',
-            attributes: {},
-            title: this.state.title,
-            content: this.state.content,
-            tags: this.state.tags,
-            notebook: notebook
-        });
-    }
-
     saveNote = (note, edit=false) => {
 
         const that = this;
@@ -479,10 +442,8 @@ class Notes extends Component<Props, State> {
     render() {
         const noteview = this.state.view.map(item => (
             <div key={item._id}>
-                {item._id === this.state.selectedNoteId && item.type !== 'Artboard' &&
+                {item._id === this.state.selectedNoteId &&
                         <Note key={item._id} id={item._id} note={item} saveNote={this.saveNote} deleteNote={this.deleteNote} notebooks={this.state.existingNotebookList}/>}
-                {item._id === this.state.selectedNoteId && item.type === 'Artboard' &&
-                        <Artboard key={item._id} id={item._id} note={item} saveNote={this.saveNote} deleteNote={this.deleteNote} notebooks={this.state.existingNotebookList}/>}
             </div>
         ))
         const listNoteRef = this.state.view.map(item => (
@@ -503,19 +464,6 @@ class Notes extends Component<Props, State> {
                     <div className="actions">
                         <button onClick={this.toggleAddDialog} className="default disabled left"><i className="material-icons">close</i>Cancel</button>
                         <button onClick={this.saveNoteEvent} className="primary animate right"><i className="material-icons">double_arrow</i>Save</button>
-                    </div>
-                </ArcDialog>
-
-                <ArcDialog title="Create Artboard" visible={this.state.isArtboardAddDialogOpen} toggleVisibility={this.toggleArtboardAddDialog}>
-                    <div><ArcSelect label="Notebook" data={this.state} id="existingNotebook" handleChange={e => this.handleChange(e)} elements={this.state.existingNotebookList} firstAction="<create new>" /></div>
-                    <div>
-                    {this.state.existingNotebook === '<create new>' && <ArcTextField label="Notebook name" data={this.state} id="newNotebook" handleChange={e => this.handleChange(e)} />}
-                    </div>
-                    <div><ArcTextField label="Title" data={this.state} id="title" handleChange={e => this.handleChange(e)} /></div>
-                    <div><ArcTextField label="Tags (separated by blank spaces)" data={this.state} id="tags" handleChange={e => this.handleChange(e)} /></div>
-                    <div className="actions">
-                        <button onClick={this.toggleArtboardAddDialog} className="default disabled left"><i className="material-icons">close</i>Cancel</button>
-                        <button onClick={this.saveArtboardEvent} className="primary animate right"><i className="material-icons">double_arrow</i>Save</button>
                     </div>
                 </ArcDialog>
 

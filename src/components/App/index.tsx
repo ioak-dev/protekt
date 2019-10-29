@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from '../../store';
 import './style.scss';
-import './button-oval.scss';
+import './button-notched.scss';
 import './metric.scss';
 import Content from './Content';
 

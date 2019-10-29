@@ -22,10 +22,12 @@ import { sendMessage } from '../../events/MessageService';
 import ResetPassword from '../Auth/ResetPassword';
 
 const themes = {
-    'themecolor_1': getTheme('#43AA8B'),
-    'themecolor_2': getTheme('#99587B'),
+    'themecolor_1': getTheme('#C4005B'),
+    'themecolor_2': getTheme('#803BC2'),
     'themecolor_3': getTheme('#E74443'),
-    'themecolor_4': getTheme('#139A43')
+    'themecolor_4': getTheme('#29BE3B'),
+    'themecolor_5': getTheme('#ffe20f'),
+    'themecolor_6': getTheme('#4d4dff')
 }
 
 function getTheme(color) {

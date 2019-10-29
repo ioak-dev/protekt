@@ -56,12 +56,6 @@
             font-size: 14px;
         }
 
-        .detail-artboard {
-            // margin-top: -10px;
-            display: flex;
-            justify-content: flex-end;
-        }
-
         &:hover {
             background-color: var(--color-hover);
 
@@ -138,15 +132,5 @@
           margin-right: 5px;
           font-size: 14px;
         }
-    }
-}
-
-.artboard {
-    .canvas-edit {
-        position: absolute;
-        left: 0px;
-        top: var(--height-nav);
-        background-color: var(--color-body);
-        padding-left: 10px;
     }
 }

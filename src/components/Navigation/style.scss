@@ -3,6 +3,7 @@
     $logoHeight: 30px;
     $logoHeightMobile: 20px;
     $signinIconHeight: 25px;
+    --clip-radius: 10px;
 
     font-family: 'Open Sans', sans-serif;
 
@@ -63,44 +64,18 @@
                 padding-left: 2px;
                 padding-right: 2px;
                 text-transform: uppercase;
-
+                padding: 2px 6px;
+                border: 2px solid rgba(0, 0, 0, 0);
                 &.active {
+                    clip-path: polygon(0 var(--clip-radius), 10px 0, 100% 0, 100% calc(100% - var(--clip-radius)), calc(100% - var(--clip-radius)) 100%, 0 100%);
+                    border: 2px solid var(--color-primary);
                     color: var(--color-body-invert);
-
-                    &::after {
-                        width: 65%;
-                        background: var(--color-primary);
-                        // height: 4px;
-                        transition: all .3s cubic-bezier(.7,0,.3,1);
-                        // transition-delay: 1s;
-                    }
                 }
 
                 &:hover {
-                // color: var(--color-body-invert);
-                color: var(--color-primary);
-                  &::after {
-                    //   width: 95%;
-                  }
-                }
-
-                &::before {
-                    transition: all .3s cubic-bezier(.7,0,.3,1);
-                }
-
-                &::after {
-                    position: absolute;
-                    bottom: -20%;
-                    left: 0;
-                    right: 0;
-                    border-radius: 100%;
-                    margin: auto;
-                    width: 0%;
-                    content: '.';
-                    color: transparent;
-                    background: var(--color-body-invert);
-                    height: 4px;
-                    transition: all .3s cubic-bezier(.7,0,.3,1);
+                    clip-path: polygon(0 var(--clip-radius), 10px 0, 100% 0, 100% calc(100% - var(--clip-radius)), calc(100% - var(--clip-radius)) 100%, 0 100%);
+                    border: 2px solid var(--color-body-invert-dim);
+                    color: var(--color-body-invert);
                 }
             }
         }

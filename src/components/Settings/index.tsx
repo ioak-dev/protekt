@@ -278,13 +278,14 @@ class Settings extends React.Component<Props, State> {
               <div className={"text-size size-4 " + (this.props.profile.textSize === 'textsize_large' ? 'active' : '')} onClick={() => this.changeTextSize('textsize_large')}>Az</div>
             </div>
 
-
             <div className="typography-5">Color Scheme</div>
             <div>
               <div className="theme-color color-1" onClick={() => this.changeThemeColor('themecolor_1')}><i className="material-icons">{this.props.profile.themeColor === 'themecolor_1' && 'check'}</i></div>
               <div className="theme-color color-2" onClick={() => this.changeThemeColor('themecolor_2')}><i className="material-icons">{this.props.profile.themeColor === 'themecolor_2' && 'check'}</i></div>
               <div className="theme-color color-3" onClick={() => this.changeThemeColor('themecolor_3')}><i className="material-icons">{this.props.profile.themeColor === 'themecolor_3' && 'check'}</i></div>
               <div className="theme-color color-4" onClick={() => this.changeThemeColor('themecolor_4')}><i className="material-icons">{this.props.profile.themeColor === 'themecolor_4' && 'check'}</i></div>
+              <div className="theme-color color-5" onClick={() => this.changeThemeColor('themecolor_5')}><i className="material-icons">{this.props.profile.themeColor === 'themecolor_5' && 'check'}</i></div>
+              <div className="theme-color color-6" onClick={() => this.changeThemeColor('themecolor_6')}><i className="material-icons">{this.props.profile.themeColor === 'themecolor_6' && 'check'}</i></div>
             </div>
           </div>
 
