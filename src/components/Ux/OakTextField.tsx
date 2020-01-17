@@ -11,7 +11,7 @@ interface Props {
     multiline?: boolean,
     type?: string
 };
-function ArcTextField(props: Props) {
+function OakTextField(props: Props) {
     const { id, label, handleChange, error, rows, multiline, data, type,  ...rest } = props;
     return (
         <TextField
@@ -32,4 +32,4 @@ function ArcTextField(props: Props) {
     )
 }
 
-export default ArcTextField;
+export default OakTextField;

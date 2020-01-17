@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Link from './Link';
 import { constants } from '../Constants';
-import ArcTextField from '../Ux/ArcTextField';
-import ArcDialog from '../Ux/ArcDialog';
+import OakDialog from '../Ux/OakDialog';
 import ViewResolver from '../Ux/ViewResolver';
 import View from '../Ux/View';
 import './style.scss';
@@ -12,6 +11,8 @@ import Sidebar from '../Ux/Sidebar';
 import { httpGet, httpPut, httpDelete } from '../Lib/RestTemplate';
 import { sendMessage } from '../../events/MessageService';
 import { Authorization } from '../Types/GeneralTypes';
+import OakText from '../Ux/OakText';
+import OakButton from '../Ux/OakButton';
 
 const queryString = require('query-string');
 
@@ -297,15 +298,17 @@ class Bookmarks extends Component<Props, State> {
         ))
         return (
             <div className="bookmarks">
-                <ArcDialog title="Add Bookmark" visible={this.state.isEditDialogOpen} toggleVisibility={this.toggleEditDialog}>
-                    <ArcTextField label="Title" data={this.state} id="title" handleChange={e => this.handleChange(e)} />
-                    <ArcTextField label="URL" data={this.state} id="href" handleChange={e => this.handleChange(e)} />
-                    <ArcTextField label="Tags" data={this.state} id="tags" handleChange={e => this.handleChange(e)} />
-                    <div className="actions">
-                        <button onClick={this.toggleEditDialog} className="default disabled"><i className="material-icons">close</i>Cancel</button>
-                        <button onClick={this.addBookmark} className="primary block"><i className="material-icons">double_arrow</i>{this.state.editDialogLabel}</button>
+                <OakDialog visible={this.state.isEditDialogOpen} toggleVisibility={this.toggleEditDialog}>
+                    <div className="dialog-body">
+                        <OakText label="Title" data={this.state} id="title" handleChange={e => this.handleChange(e)} />
+                        <OakText label="URL" data={this.state} id="href" handleChange={e => this.handleChange(e)} />
+                        <OakText label="Tags" data={this.state} id="tags" handleChange={e => this.handleChange(e)} />
                     </div>
-                </ArcDialog>
+                    <div className="dialog-footer">
+                        <OakButton action={this.toggleEditDialog} theme="default" variant="outline" align="left"><i className="material-icons">close</i>Cancel</OakButton>
+                        <OakButton action={this.addBookmark} theme="primary" variant="animate in" align="right"><i className="material-icons">double_arrow</i>{this.state.editDialogLabel}</OakButton>
+                    </div>
+                </OakDialog>
 
                 <ViewResolver>
                     <View main>
@@ -317,7 +320,7 @@ class Bookmarks extends Component<Props, State> {
                                 <Sidebar label="Add New" elements={this.state.sidebarElements['addNew']} icon="add" animate />
                                 <Sidebar label="Search" elements={this.state.sidebarElements['search']} icon="search" animate number={this.state.isFiltered ? this.state.view.length : undefined}>
                                     <form method="GET" onSubmit={this.search} noValidate>
-                                    <div className="space-top-2 space-left-4 space-right-4"><ArcTextField label="Keywords" id="searchtext" data={this.state} handleChange={e => this.handleChange(e)} /></div>
+                                    <div className="space-top-2 space-left-4 space-right-4"><OakText label="Keywords" id="searchtext" data={this.state} handleChange={e => this.handleChange(e)} /></div>
                                     </form>
                                     <div className="typography-5 space-top-2 space-left-4">
                                         <Switch
@@ -343,10 +346,10 @@ class Bookmarks extends Component<Props, State> {
                                     {this.state.isFiltered && <div className="typography-4 space-top-2 space-left-2">Found {this.state.view.length} bookmarks matching the search criteria</div>}
                                     <div className="actionbar-2 space-top-2 space-bottom-2">
                                         <div>
-                                            <button onClick={this.clearSearch} className="default">Clear</button>
+                                            <OakButton action={this.clearSearch} theme="default">Clear</OakButton>
                                         </div>
                                         <div>
-                                            <button onClick={this.search} className="default animate space-right-2">Search</button>
+                                        <OakButton action={this.search} theme="primary" variant="animate in">Search</OakButton>
                                         </div>
                                     </div>
 

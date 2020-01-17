@@ -1,5 +1,5 @@
 import React from 'react';
-import './ArcSelect.scss';
+import './OakSelect.scss';
 import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   
 interface Props {
   id: string,
-  label: string,
+  label?: string,
   handleChange: Function,
   error?: boolean,
   data: any,
@@ -31,7 +31,7 @@ interface Props {
   maxWidth?: string
 }
 
-function ArcSelect(props: Props) {
+function OakSelect(props: Props) {
     const classes = useStyles();
 
     const { id, label, elements, objects, handleChange, data, first,firstAction } = props;
@@ -66,4 +66,4 @@ function ArcSelect(props: Props) {
     )
 }
 
-export default ArcSelect;
+export default OakSelect;

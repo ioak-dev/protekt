@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Showdown from '../Ux/Showdown';
-import ArcTextField from '../Ux/ArcTextField';
-import ArcSelect from '../Ux/ArcSelect';
+import OakSelect from '../Ux/OakSelect';
 import { receiveMessage } from '../../events/MessageService';
+import OakText from '../Ux/OakText';
+import OakButton from '../Ux/OakButton';
 
 interface Props {
     note: any,
@@ -161,8 +162,8 @@ class Note extends Component<Props, State> {
                 </div>
                 {tags}
                 <div className="space-bottom-2" />
-                <button onClick={this.showEdit} className="secondary animate left"><i className="material-icons">edit</i>Edit</button>
-                <button onClick={this.delete} className="secondary animate right"><i className="material-icons">delete</i>Delete</button>
+                <OakButton action={this.showEdit} theme="secondary" variant="animate in" align="left"><i className="material-icons">edit</i>Edit</OakButton>
+                <OakButton action={this.delete} theme="secondary" variant="animate in" align="right"><i className="material-icons">delete</i>Delete</OakButton>
                 
                 
                 <Showdown source={this.props.note.content} />
@@ -173,28 +174,28 @@ class Note extends Component<Props, State> {
                 <div>
                     <div className="typography-3 space-bottom-1">{this.state.title}</div>
                     
-                    <button onClick={this.save} className="primary animate left space-bottom-2"><i className="material-icons">double_arrow</i>Save</button>
-                    <button onClick={this.showEdit} className="default disabled center"><i className="material-icons">refresh</i>Undo All</button>
-                    <button onClick={this.hideEdit} className="default disabled center"><i className="material-icons">close</i>Cancel</button>
-                    {!this.state.preview && <button onClick={this.togglepreview} className="default disabled right"><i className="material-icons">visibility</i>Show Preview</button>}
-                    {this.state.preview && <button onClick={this.togglepreview} className="default disabled right"><i className="material-icons">visibility_off</i>Hide Preview</button>}
+                    <OakButton action={this.save} theme="primary" variant="animate in" align="left"><i className="material-icons">double_arrow</i>Save</OakButton>
+                    <OakButton action={this.showEdit} theme="default" variant="outline" align="center"><i className="material-icons">refresh</i>Undo All</OakButton>
+                    <OakButton action={this.hideEdit} theme="default" variant="outline" align="center"><i className="material-icons">close</i>Cancel</OakButton>
+                    {!this.state.preview && <OakButton action={this.togglepreview} theme="default" variant="outline" align="right"><i className="material-icons">visibility</i>Show Preview</OakButton>}
+                    {this.state.preview && <OakButton action={this.togglepreview} theme="default" variant="outline" align="right"><i className="material-icons">visibility_off</i>Hide Preview</OakButton>}
                     
-                    <div><ArcSelect label="Flag" data={this.state} id="flag" handleChange={e => this.handleChange(e)} objects={this.state.flags} /></div>
-                    <div><ArcSelect label="Notebook" data={this.state} id="notebook" handleChange={e => this.handleChange(e)} elements={this.props.notebooks} firstAction="<create new>" /></div>
+                    <div><OakSelect label="Flag" data={this.state} id="flag" handleChange={e => this.handleChange(e)} objects={this.state.flags} /></div>
+                    <div><OakSelect label="Notebook" data={this.state} id="notebook" handleChange={e => this.handleChange(e)} elements={this.props.notebooks} firstAction="<create new>" /></div>
                     <div>
-                        {this.state.notebook === '<create new>' && <ArcTextField label="Notebook name" data={this.state} id="newNotebook" handleChange={e => this.handleChange(e)} />}
+                        {this.state.notebook === '<create new>' && <OakText label="Notebook name" data={this.state} id="newNotebook" handleChange={e => this.handleChange(e)} />}
                     </div>
-                    <ArcTextField label="Title" data={this.state} id="title" handleChange={e => this.handleChange(e)} />
-                    <ArcTextField label="Tags (separated by blank spaces)" data={this.state} id="tags" handleChange={e => this.handleChange(e)} />
+                    <OakText label="Title" data={this.state} id="title" handleChange={e => this.handleChange(e)} />
+                    <OakText label="Tags (separated by blank spaces)" data={this.state} id="tags" handleChange={e => this.handleChange(e)} />
 
                     {this.state.preview && <div className="edit-note-view">
-                        <div><ArcTextField label="Content (Markdown / HTML / Plaintext)" data={this.state} id="content" multiline handleChange={e => this.handleChange(e)} /></div>
+                        <div><OakText label="Content (Markdown / HTML / Plaintext)" data={this.state} id="content" multiline handleChange={e => this.handleChange(e)} /></div>
                         <div>
                             <div className="typography-5 space-bottom-1">Preview</div>
                             <Showdown source={this.state.content} />
                         </div>
                     </div>}
-                    {!this.state.preview && <ArcTextField label="Content (Markdown / HTML / Plaintext)" data={this.state} id="content" multiline handleChange={e => this.handleChange(e)} />}
+                    {!this.state.preview && <OakText label="Content (Markdown / HTML / Plaintext)" data={this.state} id="content" multiline handleChange={e => this.handleChange(e)} />}
                     <div className="space-top-2" />
             </div>}
             </>

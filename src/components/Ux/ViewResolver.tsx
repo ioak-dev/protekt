@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './ViewResolver.scss';
 import { sendMessage, receiveMessage } from '../../events/MessageService';
+import OakButton from './OakButton';
 
 interface Props {
     sideLabel?: string
@@ -106,10 +107,10 @@ class ViewResolver extends Component<Props, State> {
                 <div className={(this.state.showSide ? "slider show" : "slider hide")}>
                     <div className="topbar" onClick={this.toggleSideView}>
                         <div>
-                            <button className="default hidden" onClick={this.toggleSideView}>
+                            <OakButton theme="default" variant="disabled" action={this.toggleSideView}>
                                 {!this.state.showSide && <><i className="material-icons">expand_more</i>{this.props.sideLabel ? this.props.sideLabel : 'Menu'}</>}
                                 {this.state.showSide && <><i className="material-icons">expand_less</i>Collapse</>}
-                            </button>
+                            </OakButton>
                         </div>
                     </div>
                     <div className="view-side">
