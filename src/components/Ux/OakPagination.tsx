@@ -58,7 +58,7 @@ class OakPagination extends Component<Props, State> {
             <div className="oak-pagination">
                 <div className="space-right-3">{this.props.label ? this.props.label : "Rows per page"}</div>
                 <div className="space-right-3">
-                    <OakSelect maxWidth="max-width-50" data={this.state} id="rowsPerPage" handleChange={e => this.handleRowCountChange(e)} elements={["6","10","20","50"]} />
+                    <OakSelect data={this.state} id="rowsPerPage" handleChange={e => this.handleRowCountChange(e)} elements={["6","10","20","50"]} />
                 </div>
                 <div className="page-number space-right-3">
                     <div>{(this.state.pageNo - 1) * this.state.rowsPerPage + 1} 

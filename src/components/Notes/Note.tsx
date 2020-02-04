@@ -179,8 +179,8 @@ class Note extends Component<Props, State> {
                     <OakButton action={this.hideEdit} theme="default" variant="outline" align="center"><i className="material-icons">close</i>Cancel</OakButton>
                     {!this.state.preview && <OakButton action={this.togglepreview} theme="default" variant="outline" align="right"><i className="material-icons">visibility</i>Show Preview</OakButton>}
                     {this.state.preview && <OakButton action={this.togglepreview} theme="default" variant="outline" align="right"><i className="material-icons">visibility_off</i>Hide Preview</OakButton>}
-                    
-                    <div><OakSelect label="Flag" data={this.state} id="flag" handleChange={e => this.handleChange(e)} objects={this.state.flags} /></div>
+
+                    <div><OakSelect width="width-25" label="Flag" data={this.state} id="flag" handleChange={e => this.handleChange(e)} objects={this.state.flags} /></div>
                     <div><OakSelect label="Notebook" data={this.state} id="notebook" handleChange={e => this.handleChange(e)} elements={this.props.notebooks} firstAction="<create new>" /></div>
                     <div>
                         {this.state.notebook === '<create new>' && <OakText label="Notebook name" data={this.state} id="newNotebook" handleChange={e => this.handleChange(e)} />}

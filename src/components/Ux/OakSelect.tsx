@@ -1,69 +1,81 @@
 import React from 'react';
 import './OakSelect.scss';
-import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    formControl: {
-    //   margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-  }));
-
-  
 interface Props {
   id: string,
   label?: string,
   handleChange: Function,
   error?: boolean,
   data: any,
-  elements?: Array<string>,
+  elements?: string[],
   objects?: Array<any>,
   first?: string,
   firstAction?: string,
-  maxWidth?: string
+  variant?: 'outline' | 'no-outline' | 'block' | 'normal',
+  theme?: 'primary' | 'secondary' | 'tertiary' | 'default',
+  width?: 'width-25' | 'width-50' | 'width-75' | 'width-100'
+}
+interface State {
+  show?: boolean
 }
 
-function OakSelect(props: Props) {
-    const classes = useStyles();
-
-    const { id, label, elements, objects, handleChange, data, first,firstAction } = props;
-    let dropdownList: Array<any> = [];
-    
-    if (elements) {
-      dropdownList = elements.map(item => <MenuItem key={item} value={item}>{item}</MenuItem>);
-    } else if (objects) {
-      dropdownList = objects.map(item => <MenuItem key={item.key} value={item.key}>{item.value}</MenuItem>);
+export default class OakSelect extends React.Component<Props, State> {
+  constructor(props){
+    super(props)
+    this.state = {
+      show: false
     }
-    
-    return (
-        <>
-        <FormControl className={"arc-select " + classes.formControl}>
-            <InputLabel htmlFor={id}>{label}</InputLabel>
-            <Select
-            value={data[id]}
-            onChange={e => handleChange(e)}
-            inputProps={{
-                name: id,
-                id: id,
-            }}
-            autoWidth
-            className={props.maxWidth ? props.maxWidth : ""}
-            >
-                {first && <MenuItem value={first}>{first}</MenuItem>}
-                {firstAction && <MenuItem value={firstAction}><em>{firstAction}</em></MenuItem>}
-                {dropdownList}
-            </Select>
-        </FormControl>
-        </>
-    )
-}
+  }
+  
+  toggle = () => {
+    this.setState({
+      show: !this.state.show
+    })
+  }
 
-export default OakSelect;
+  changeSelection = (e, newValue) => {
+    e.target.name = this.props.id;
+    e.target.value = newValue;
+    this.props.handleChange(e);
+    this.toggle();
+  }
+  
+  getStyle = () => {
+    let style = this.props.theme ? this.props.theme : "";
+    style = style + (this.props.variant ? " " + this.props.variant : "");
+    style = style + (this.props.width ? " " + this.props.width : "");
+
+    return style;
+  }
+
+  render() {
+    let dropdownList: Array<any> = [];
+
+    if (this.props.elements) {
+      dropdownList = this.props.elements.map(item => <div className="option" key={item} onClick={(e) => this.changeSelection(e, item)}>{item}</div>);
+    } else if (this.props.objects) {
+      dropdownList = this.props.objects.map(item => <div className="option" key={item} onClick={(e) => this.changeSelection(e, item.key)}>{item.value}</div>);
+    }
+
+    return (
+      <>
+        <div className={"oak-select " + this.getStyle()}>
+          {this.props.label && <label>{this.props.label}</label>}
+          <div className="select-button" onClick={() => this.toggle()}>
+            {this.props.elements && <div>{this.props.data[this.props.id]}</div>}
+            {this.props.objects && <div>{this.props.objects.find((element) => element.key === this.props.data[this.props.id]) && this.props.objects.find((element) => element.key === this.props.data[this.props.id]).value}</div>}
+            {/*{this.props.objects && <div>{this.props.objects[0].value}</div>}*/}
+            <div><i className="material-icons">keyboard_arrow_down</i></div>
+          </div>
+          <div className={this.state.show ? "dropdown show" : "dropdown hide"}>
+            <div className="dropdown-content">
+              {this.props.first && <div className="option" onClick={e => this.changeSelection(e, this.props.first)}>{this.props.first}</div>}
+              {this.props.firstAction && <div className="option" onClick={e => this.changeSelection(e, this.props.firstAction)}>{this.props.firstAction}</div>}
+              {dropdownList}
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  }
+}
