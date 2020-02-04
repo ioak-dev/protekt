@@ -249,7 +249,7 @@ class Settings extends React.Component<Props, State> {
         <ViewResolver sideLabel='More options'>
           <View main>
           <div className="typography-3">Import Bookmarks</div>
-          <div className="space-top-2 space-left-2">
+          <div className="space-top-2">
             <label className="file-upload">
               <input type="file" name="file" onChange={this.fileChoosen} />
               Import
