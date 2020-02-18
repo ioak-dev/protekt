@@ -6,13 +6,15 @@
     }
 
     .file-upload {
+        width: 50px;
         padding-top: 100px;
         text-transform: uppercase;
         cursor: pointer;
         border: 2px solid var(--color-btn-secondary-bg);
         padding: 8px 16px;
-        font-size: 0.8em;
+        font-size: 0.9em;
         clip-path: polygon(0 var(--clip-radius), 10px 0, 100% 0, 100% calc(100% - var(--clip-radius)), calc(100% - var(--clip-radius)) 100%, 0 100%);
+        color: var(--color-btn-secondary-fg) !important;
         &:hover {
           color: var(--color-btn-secondary-fg-hover) !important;
           background-color: var(--color-btn-secondary-bg) !important;

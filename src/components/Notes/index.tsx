@@ -3,18 +3,19 @@ import Note from './Note';
 import { Switch } from '@material-ui/core';
 import { constants } from '../Constants';
 import { httpGet, httpPut, httpDelete } from "../Lib/RestTemplate";
-import ArcTextField from '../Ux/ArcTextField';
-import ArcDialog from '../Ux/ArcDialog';
+import OakDialog from '../Ux/OakDialog';
 import ViewResolver from '../Ux/ViewResolver';
 import View from '../Ux/View';
 import './style.scss';
 import NoteRef from './NoteRef';
 import { isEmptyOrSpaces, match, sort } from '../Utils';
-import ArcSelect from '../Ux/ArcSelect';
+import OakSelect from '../Ux/OakSelect';
 import Sidebar from '../Ux/Sidebar';
 
 import { sendMessage, receiveMessage } from '../../events/MessageService';
 import { Authorization } from '../Types/GeneralTypes';
+import OakText from '../Ux/OakText';
+import OakButton from '../Ux/OakButton';
 
 const queryString = require('query-string');
 
@@ -59,7 +60,7 @@ interface State {
 }
 
 class Notes extends Component<Props, State> {
-    
+
     _isMounted = false;
 
     constructor(props) {
@@ -106,7 +107,7 @@ class Notes extends Component<Props, State> {
         }
     }
 
-    sortTypes = 
+    sortTypes =
         {'created': 'createdAt',
         'last modified': 'lastModifiedAt',
         'notebook': 'notebook',
@@ -151,7 +152,7 @@ class Notes extends Component<Props, State> {
             }
         })
     }
-    
+
     componentWillUnmount() {
         this._isMounted = false;
     }
@@ -178,7 +179,7 @@ class Notes extends Component<Props, State> {
                 } else {
                     sendMessage('noteListRefreshed', true);
                 }
-                
+
                 const existingNotebookList: any = [];
                 response.data.map(item => existingNotebookList.push(item.notebook))
 
@@ -330,7 +331,7 @@ class Notes extends Component<Props, State> {
                 that.setState({
                     selectedNoteId: undefined
                 }, () => that.initializeNotes(that.props.authorization));
-                
+
             }
         })
         .catch((error) => {
@@ -410,7 +411,7 @@ class Notes extends Component<Props, State> {
                     sendMessage('notification', true, {type: 'success', message: 'Note created', duration: 5000});
                     that.closeAllDialog();
                 }
-                
+
                 that.initializeNotes(that.props.authorization, response.data._id);
             }
         })
@@ -453,19 +454,21 @@ class Notes extends Component<Props, State> {
         ))
         return (
             <div className="notes">
-                <ArcDialog title="Add Note" visible={this.state.isAddDialogOpen} toggleVisibility={this.toggleAddDialog}>
-                    <div><ArcSelect label="Notebook" data={this.state} id="existingNotebook" handleChange={e => this.handleChange(e)} elements={this.state.existingNotebookList} firstAction="<create new>" /></div>
-                    <div>
-                    {this.state.existingNotebook === '<create new>' && <ArcTextField label="Notebook name" data={this.state} id="newNotebook" handleChange={e => this.handleChange(e)} />}
+                <OakDialog visible={this.state.isAddDialogOpen} toggleVisibility={this.toggleAddDialog}>
+                    <div className="dialog-body">
+                        <div><OakSelect label="Notebook" data={this.state} id="existingNotebook" handleChange={e => this.handleChange(e)} elements={this.state.existingNotebookList} firstAction="<create new>" /></div>
+                        <div>
+                            {this.state.existingNotebook === '<create new>' && <OakText label="Notebook name" data={this.state} id="newNotebook" handleChange={e => this.handleChange(e)} />}
+                        </div>
+                        <div><OakText label="Title" data={this.state} id="title" handleChange={e => this.handleChange(e)} /></div>
+                        <div><OakText label="Tags (separated by blank spaces)" data={this.state} id="tags" handleChange={e => this.handleChange(e)} /></div>
+                        <div><OakText label="Content (Markdown / HTML / Plaintext)" data={this.state} id="content" multiline handleChange={e => this.handleChange(e)} /></div>
                     </div>
-                    <div><ArcTextField label="Title" data={this.state} id="title" handleChange={e => this.handleChange(e)} /></div>
-                    <div><ArcTextField label="Tags (separated by blank spaces)" data={this.state} id="tags" handleChange={e => this.handleChange(e)} /></div>
-                    <div><ArcTextField label="Content (Markdown / HTML / Plaintext)" data={this.state} id="content" multiline handleChange={e => this.handleChange(e)} /></div>
-                    <div className="actions">
-                        <button onClick={this.toggleAddDialog} className="default disabled left"><i className="material-icons">close</i>Cancel</button>
-                        <button onClick={this.saveNoteEvent} className="primary animate right"><i className="material-icons">double_arrow</i>Save</button>
+                    <div className="dialog-footer">
+                        <OakButton action={this.toggleAddDialog} theme="default" variant="outline"><i className="material-icons">close</i>Cancel</OakButton>
+                        <OakButton action={this.saveNoteEvent} theme="primary" variant="animate in"><i className="material-icons">double_arrow</i>Save</OakButton>
                     </div>
-                </ArcDialog>
+                </OakDialog>
 
                 <ViewResolver sideLabel='More options'>
                     <View main>
@@ -474,54 +477,54 @@ class Notes extends Component<Props, State> {
                     <View side>
                         <div className="filter-container">
                             <div className="section-main">
-                            <Sidebar label="Add New" elements={this.state.sidebarElements['addNew']} icon="add" animate />
-                            <Sidebar label="Search" elements={this.state.sidebarElements['search']} icon="search" animate number={this.state.isFiltered ? this.state.searchResults.length : undefined}>
-                                <div className="space-top-1" />
-                                <form method="GET" onSubmit={this.search} noValidate>
-                                    <div className="space-left-4 space-right-4"><ArcTextField label="Keywords" id="searchtext" data={this.state} handleChange={e => this.handleChange(e)} /></div>
-                                </form>
-                                <div className="typography-5 space-top-2 space-left-4">
-                                    <Switch
-                                        checked={this.state.searchPref.title}
-                                        onChange={() => this.toggleSearchPref('title')}
-                                        inputProps={{ 'aria-label': 'primary checkbox' }}/>
-                                    Include title
-                                </div>
-                                <div className="typography-5 space-top-2 space-left-4">
-                                    <Switch
-                                        checked={this.state.searchPref.tags}
-                                        onChange={() => this.toggleSearchPref('tags')}
-                                        inputProps={{ 'aria-label': 'primary checkbox' }}/>
-                                    Include tags
-                                </div>
-                                <div className="typography-5 space-top-2 space-left-4">
-                                    <Switch
-                                        checked={this.state.searchPref.content}
-                                        onChange={() => this.toggleSearchPref('content')}
-                                        inputProps={{ 'aria-label': 'primary checkbox' }}/>
-                                    Include Content
-                                </div>
-                                {this.state.isFiltered && <div className="typography-4 space-top-2">Found {this.state.searchResults.length} notes matching the search criteria</div>}
-                                <div className="actionbar-2 space-top-2 space-bottom-2">
-                                    <div>
-                                        <button onClick={this.clearSearch} className="default">Clear</button>
+                                <Sidebar label="Add New" elements={this.state.sidebarElements['addNew']} icon="add" animate />
+                                <Sidebar label="Search" elements={this.state.sidebarElements['search']} icon="search" animate number={this.state.isFiltered ? this.state.searchResults.length : undefined}>
+                                    <div className="space-top-1" />
+                                    <form method="GET" onSubmit={this.search} noValidate>
+                                        <div className="space-left-4 space-right-4"><OakText label="Keywords" id="searchtext" data={this.state} handleChange={e => this.handleChange(e)} /></div>
+                                    </form>
+                                    <div className="typography-5 space-top-2 space-left-4">
+                                        <Switch
+                                            checked={this.state.searchPref.title}
+                                            onChange={() => this.toggleSearchPref('title')}
+                                            inputProps={{ 'aria-label': 'primary checkbox' }}/>
+                                        Include title
                                     </div>
-                                    <div>
-                                        <button onClick={this.search} className="default animate space-right-2">Search</button>
+                                    <div className="typography-5 space-top-2 space-left-4">
+                                        <Switch
+                                            checked={this.state.searchPref.tags}
+                                            onChange={() => this.toggleSearchPref('tags')}
+                                            inputProps={{ 'aria-label': 'primary checkbox' }}/>
+                                        Include tags
                                     </div>
-                                </div>
-                            </Sidebar>
-                                
-                            <Sidebar label={this.state.isFiltered ? "Search results" : "All Notes"} icon="notes" number={this.state.view.length}>
-                                <div className="filter-bar">
-                                    {this.state.filteredNotebookList.length > 1 && <div><ArcSelect maxWidth="max-width-200" label="Notebook" data={this.state} id="notebookFilter" handleChange={e => this.handleNotebookFilterChange(e)} elements={this.state.filteredNotebookList} first='all notebooks' /></div>}
-                                    {this.state.filteredNotebookList.length === 1 && <div><ArcSelect maxWidth="max-width-200" label="Notebook" data={this.state} id="notebookFilter" handleChange={e => this.handleNotebookFilterChange(e)} elements={this.state.filteredNotebookList} /></div>}
-                                    <div></div>
-                                    <div><ArcSelect label="Sort by" data={this.state} id="sortBy" handleChange={e => this.handleNotebookFilterChange(e)} elements={Object.keys(this.sortTypes)} /></div>
-                                    <div><ArcSelect label="Sort Order" data={this.state} id="sortOrder" handleChange={e => this.handleNotebookFilterChange(e)} elements={this.sortOrders} /></div>
-                                </div>
-                                {listNoteRef}
-                            </Sidebar>
+                                    <div className="typography-5 space-top-2 space-left-4">
+                                        <Switch
+                                            checked={this.state.searchPref.content}
+                                            onChange={() => this.toggleSearchPref('content')}
+                                            inputProps={{ 'aria-label': 'primary checkbox' }}/>
+                                        Include Content
+                                    </div>
+                                    {this.state.isFiltered && <div className="typography-4 space-top-2">Found {this.state.searchResults.length} notes matching the search criteria</div>}
+                                    <div className="actionbar-2 space-top-2 space-bottom-2">
+                                        <div>
+                                            <OakButton action={this.clearSearch} theme="default" variant="animate none">Clear</OakButton>
+                                        </div>
+                                        <div>
+                                            <OakButton action={this.search} theme="default" variant="animate in">Search</OakButton>
+                                        </div>
+                                    </div>
+                                </Sidebar>
+
+                                <Sidebar label={this.state.isFiltered ? "Search results" : "All Notes"} icon="notes" number={this.state.view.length}>
+                                    <div className="filter-bar">
+                                        {this.state.filteredNotebookList.length > 1 && <div><OakSelect label="Notebook" data={this.state} id="notebookFilter" handleChange={e => this.handleNotebookFilterChange(e)} elements={this.state.filteredNotebookList} first='all notebooks' /></div>}
+                                        {this.state.filteredNotebookList.length === 1 && <div><OakSelect label="Notebook" data={this.state} id="notebookFilter" handleChange={e => this.handleNotebookFilterChange(e)} elements={this.state.filteredNotebookList} /></div>}
+                                        <div></div>
+                                        <div><OakSelect label="Sort by" data={this.state} id="sortBy" handleChange={e => this.handleNotebookFilterChange(e)} elements={Object.keys(this.sortTypes)} /></div>
+                                        <div><OakSelect label="Sort Order" data={this.state} id="sortOrder" handleChange={e => this.handleNotebookFilterChange(e)} elements={this.sortOrders} /></div>
+                                    </div>
+                                    {listNoteRef}
+                                </Sidebar>
                             </div>
                         </div>
                     </View>
