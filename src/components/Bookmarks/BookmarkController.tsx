@@ -7,7 +7,7 @@ import { Authorization } from '../Types/GeneralTypes';
 import {
   fetchBookmark,
   saveBookmark,
-  deleteBookmark
+  deleteBookmark,
 } from '../../actions/BookmarkActions';
 import BookmarkView from './BookmarkView';
 
@@ -29,7 +29,7 @@ const BookmarkController = (props: Props) => {
     id: undefined,
     title: '',
     href: '',
-    tags: ''
+    tags: '',
   });
 
   const [searchPref, setSearchPref] = useState({
@@ -39,7 +39,7 @@ const BookmarkController = (props: Props) => {
     content: true,
     searchText: '',
     filtered: false,
-    filterActivator: false
+    filterActivator: false,
   });
 
   const [firstLoad, setFirstLoad] = useState(true);
@@ -55,13 +55,13 @@ const BookmarkController = (props: Props) => {
             title: false,
             tags: true,
             href: true,
-            content: false
+            content: false,
           });
         }
         setSearchPref({
           ...searchPref,
           searchText: query.q,
-          filterActivator: !searchPref.filterActivator
+          filterActivator: !searchPref.filterActivator,
         });
       }
     }
@@ -77,7 +77,7 @@ const BookmarkController = (props: Props) => {
   useEffect(() => {
     setSearchPref({
       ...searchPref,
-      filterActivator: !searchPref.filterActivator
+      filterActivator: !searchPref.filterActivator,
     });
   }, [props.bookmark]);
 
@@ -90,7 +90,7 @@ const BookmarkController = (props: Props) => {
       id: bookmark ? bookmark._id : '',
       title: bookmark ? bookmark.title : '',
       href: bookmark ? bookmark.href : '',
-      tags: bookmark ? bookmark.tags : ''
+      tags: bookmark ? bookmark.tags : '',
     });
   };
 
@@ -104,7 +104,7 @@ const BookmarkController = (props: Props) => {
     setSearchPref({
       ...searchPref,
       searchText: '',
-      filterActivator: !searchPref.filterActivator
+      filterActivator: !searchPref.filterActivator,
     });
     sendMessage('sidebar', false);
   };
@@ -116,7 +116,7 @@ const BookmarkController = (props: Props) => {
       tags: true,
       href: false,
       searchText: tagName,
-      filterActivator: !searchPref.filterActivator
+      filterActivator: !searchPref.filterActivator,
     });
   };
 
@@ -150,7 +150,7 @@ const BookmarkController = (props: Props) => {
   const toggleSearchPref = pref => {
     setSearchPref({
       ...searchPref,
-      [pref]: !searchPref[pref]
+      [pref]: !searchPref[pref],
     });
   };
 
@@ -159,7 +159,7 @@ const BookmarkController = (props: Props) => {
       sendMessage('notification', true, {
         type: 'failure',
         message: 'Title / description missing',
-        duration: 5000
+        duration: 5000,
       });
       return;
     }
@@ -168,7 +168,7 @@ const BookmarkController = (props: Props) => {
       sendMessage('notification', true, {
         type: 'failure',
         message: 'Website URL / Link is missing',
-        duration: 5000
+        duration: 5000,
       });
       return;
     }
@@ -183,14 +183,14 @@ const BookmarkController = (props: Props) => {
   const handleBookmarkDataChange = event => {
     setBookmark({
       ...bookmark,
-      [event.currentTarget.name]: event.currentTarget.value
+      [event.currentTarget.name]: event.currentTarget.value,
     });
   };
 
   const handleSearchPrefDataChange = event => {
     setSearchPref({
       ...searchPref,
-      [event.currentTarget.name]: event.currentTarget.value
+      [event.currentTarget.name]: event.currentTarget.value,
     });
   };
 
@@ -213,11 +213,11 @@ const BookmarkController = (props: Props) => {
 };
 
 const mapStateToProps = state => ({
-  bookmark: state.bookmark
+  bookmark: state.bookmark,
 });
 
 export default connect(mapStateToProps, {
   fetchBookmark,
   saveBookmark,
-  deleteBookmark
+  deleteBookmark,
 })(BookmarkController);

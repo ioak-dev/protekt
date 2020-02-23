@@ -4,7 +4,7 @@ import { withCookies } from 'react-cookie';
 import {
   getProfile,
   setProfile,
-  persistProfile
+  persistProfile,
 } from '../../actions/ProfileActions';
 import './style.scss';
 import View from '../../oakui/View';
@@ -39,7 +39,7 @@ const Settings = (props: Props) => {
       {
         name: user?.name,
         email: user?.email,
-        password: user?.password
+        password: user?.password,
       },
       props.authorization,
       type
@@ -50,7 +50,7 @@ const Settings = (props: Props) => {
             sendMessage('notification', true, {
               message: 'Password updated successfully',
               type: 'success',
-              duration: 3000
+              duration: 3000,
             });
           } else {
             props.cookies.set('name', user?.name);
@@ -58,14 +58,14 @@ const Settings = (props: Props) => {
             sendMessage('notification', true, {
               message: 'User account updated successfully',
               type: 'success',
-              duration: 3000
+              duration: 3000,
             });
           }
         } else {
           sendMessage('notification', true, {
             type: 'failure',
             message: 'Unknown error. Please try again or at a later time',
-            duration: 3000
+            duration: 3000,
           });
         }
       })
@@ -73,7 +73,7 @@ const Settings = (props: Props) => {
         sendMessage('notification', true, {
           type: 'failure',
           message: 'Unknown error. Please try again or at a later time',
-          duration: 3000
+          duration: 3000,
         });
       });
   };
@@ -105,11 +105,11 @@ const Settings = (props: Props) => {
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, {
   getProfile,
   setProfile,
-  persistProfile
+  persistProfile,
 })(withCookies(Settings));

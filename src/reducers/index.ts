@@ -8,5 +8,5 @@ export default combineReducers({
   authorization: AuthReducer,
   profile: ProfileReducer,
   bookmark: BookmarkReducer,
-  note: NoteReducer
+  note: NoteReducer,
 });

@@ -56,7 +56,7 @@
     "*.{js,jsx,ts,tsx,json,css,scss,html}": [
       "npm run pretty:quick",
       "npm run lint:fix",
-      "git add"
+      "git add ."
     ]
   },
   "browserslist": {

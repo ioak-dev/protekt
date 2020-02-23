@@ -27,7 +27,7 @@ const PrivateRoute = (props: Props) => {
 };
 
 const mapStateToProps = state => ({
-  authorization: state.authorization
+  authorization: state.authorization,
 });
 
 export default connect(mapStateToProps, { getAuth })(PrivateRoute);

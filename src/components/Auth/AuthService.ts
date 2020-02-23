@@ -16,7 +16,7 @@ export function signup(data) {
       name: data.name,
       email: data.email,
       problem: encrypt(data.password, data.solution, data.salt),
-      solution: data.solution
+      solution: data.solution,
     },
     null
   ).then(function(response) {
@@ -37,7 +37,7 @@ export function signin(data, problem) {
       constants.API_URL_SIGNIN,
       {
         email: data.email,
-        solution
+        solution,
       },
       null
     ).then(function(response) {
@@ -46,7 +46,7 @@ export function signin(data, problem) {
   } catch (error) {
     if (error.message === "ccm: tag doesn't match") {
       return Promise.resolve({
-        status: 401
+        status: 401,
       });
     }
     return Promise.resolve(error);
@@ -65,12 +65,12 @@ export function updateUserDetails(data, authorization, type) {
             response.data.solution,
             response.data.salt
           ),
-          solution: response.data.solution
+          solution: response.data.solution,
         };
       } else {
         newData = {
           name: data.name,
-          email: data.email
+          email: data.email,
         };
       }
 
@@ -79,8 +79,8 @@ export function updateUserDetails(data, authorization, type) {
         newData,
         {
           headers: {
-            Authorization: `Bearer ${authorization.token}`
-          }
+            Authorization: `Bearer ${authorization.token}`,
+          },
         },
         authorization.password,
         ['problem', 'solution', 'email', 'name']
@@ -109,7 +109,7 @@ export function resetPassword(data, type) {
             response.data.salt
           ),
           solution: response.data.solution,
-          resetCode: data.resetCode
+          resetCode: data.resetCode,
         };
       }
 
@@ -127,7 +127,7 @@ function encrypt(password, message, salt) {
     cipher: 'aes',
     iter: '12000',
     ks: 256,
-    salt: CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(salt))
+    salt: CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(salt)),
   };
   return sjcl.encrypt(password, message, config);
 }

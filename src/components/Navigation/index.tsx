@@ -6,7 +6,7 @@ import { Switch } from '@material-ui/core';
 import {
   getProfile,
   setProfile,
-  reloadProfile
+  reloadProfile,
 } from '../../actions/ProfileActions';
 
 import './style.scss';
@@ -44,7 +44,7 @@ const Navigation = (props: Props) => {
     chooseTheme: false,
     showSettings: false,
     transparentNavBar: false,
-    firstLoad: true
+    firstLoad: true,
   });
 
   useEffect(() => {
@@ -236,11 +236,11 @@ const Navigation = (props: Props) => {
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, {
   getProfile,
   setProfile,
-  reloadProfile
+  reloadProfile,
 })(withCookies(withRouter(Navigation)));

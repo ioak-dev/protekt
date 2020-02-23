@@ -19,7 +19,7 @@ const ResetPassword = (props: Props) => {
   const [data, setData] = useState({
     password: '',
     repeatPassword: '',
-    resetCode: ''
+    resetCode: '',
   });
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const ResetPassword = (props: Props) => {
       sendMessage('notification', true, {
         message: 'password not provided',
         type: 'failure',
-        duration: 5000
+        duration: 5000,
       });
       return;
     }
@@ -54,7 +54,7 @@ const ResetPassword = (props: Props) => {
       sendMessage('notification', true, {
         message: 'Repeat password not provided',
         type: 'failure',
-        duration: 5000
+        duration: 5000,
       });
       return;
     }
@@ -63,7 +63,7 @@ const ResetPassword = (props: Props) => {
       sendMessage('notification', true, {
         message: 'Password is not matching',
         type: 'failure',
-        duration: 5000
+        duration: 5000,
       });
       return;
     }
@@ -75,7 +75,7 @@ const ResetPassword = (props: Props) => {
     resetPassword(
       {
         password: data.password,
-        resetCode: data.resetCode
+        resetCode: data.resetCode,
       },
       type
     )
@@ -85,14 +85,14 @@ const ResetPassword = (props: Props) => {
             sendMessage('notification', true, {
               message: 'Password Changed successfully',
               type: 'success',
-              duration: 3000
+              duration: 3000,
             });
           }
         } else {
           sendMessage('notification', true, {
             type: 'failure',
             message: 'Invalid request',
-            duration: 3000
+            duration: 3000,
           });
         }
       })
@@ -100,7 +100,7 @@ const ResetPassword = (props: Props) => {
         sendMessage('notification', true, {
           type: 'failure',
           message: 'Bad request',
-          duration: 3000
+          duration: 3000,
         });
       });
   };
@@ -141,7 +141,7 @@ const ResetPassword = (props: Props) => {
 };
 
 const mapStateToProps = state => ({
-  authorization: state.authorization
+  authorization: state.authorization,
 });
 
 export default connect(mapStateToProps, { getAuth, addAuth, removeAuth })(

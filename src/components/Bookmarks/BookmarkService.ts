@@ -8,8 +8,8 @@ const importBookmarks = (data, authorization) => {
     data,
     {
       headers: {
-        Authorization: 'Bearer ' + authorization.token
-      }
+        Authorization: `Bearer ${authorization.token}`,
+      },
     },
     authorization.password
   ).then(function(response) {

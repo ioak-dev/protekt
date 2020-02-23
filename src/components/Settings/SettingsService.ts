@@ -4,8 +4,8 @@ import constants from '../Constants';
 export default function sendBookmarkExportEmail(data, token) {
   return httpPost(constants.API_URL_MAIL, data, {
     headers: {
-      Authorization: `Bearer ${token}`
-    }
+      Authorization: `Bearer ${token}`,
+    },
   }).then(function(response) {
     return Promise.resolve(response.status);
   });

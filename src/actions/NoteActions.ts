@@ -10,14 +10,14 @@ export const fetchNote = authorization => dispatch => {
     constants.API_URL_NOTE,
     {
       headers: {
-        Authorization: `Bearer ${authorization.token}`
-      }
+        Authorization: `Bearer ${authorization.token}`,
+      },
     },
     authorization.password
   ).then(response => {
     dispatch({
       type: FETCH_NOTE,
-      payload: response.data
+      payload: response.data,
     });
   });
 };
@@ -32,8 +32,8 @@ export const saveNote = (authorization, payload) => dispatch => {
     payload,
     {
       headers: {
-        Authorization: `Bearer ${authorization.token}`
-      }
+        Authorization: `Bearer ${authorization.token}`,
+      },
     },
     authorization.password,
     ['attributes']
@@ -52,8 +52,8 @@ export const saveNote = (authorization, payload) => dispatch => {
 export const deleteNote = (authorization, id) => dispatch => {
   httpDelete(`${constants.API_URL_NOTE}/${id}`, {
     headers: {
-      Authorization: `Bearer ${authorization.token}`
-    }
+      Authorization: `Bearer ${authorization.token}`,
+    },
   })
     .then(function(response) {
       if (response.status === 201) {

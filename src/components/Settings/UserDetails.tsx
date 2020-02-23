@@ -14,7 +14,7 @@ interface Props {
 const UserDetails = (props: Props) => {
   const [data, setData] = useState({
     name: '',
-    email: ''
+    email: '',
   });
 
   const handleChange = event => {
@@ -26,7 +26,7 @@ const UserDetails = (props: Props) => {
       sendMessage('notification', true, {
         message: 'Name not provided',
         type: 'failure',
-        duration: 5000
+        duration: 5000,
       });
       return;
     }
@@ -35,7 +35,7 @@ const UserDetails = (props: Props) => {
       sendMessage('notification', true, {
         message: 'Email not provided',
         type: 'failure',
-        duration: 5000
+        duration: 5000,
       });
       return;
     }
@@ -44,7 +44,7 @@ const UserDetails = (props: Props) => {
       sendMessage('notification', true, {
         type: 'failure',
         message: 'Email ID is invalid',
-        duration: 3000
+        duration: 3000,
       });
       return;
     }

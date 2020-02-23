@@ -16,14 +16,14 @@ const BookmarkImport = (props: Props) => {
     reader.onload = function(eventInner: any) {
       importBookmarks(
         {
-          content: eventInner.target.result
+          content: eventInner.target.result,
         },
         props.authorization
       ).then(response => {
         sendMessage('notification', true, {
           message: `Imported (${response.data.length}) bookmarks successfully`,
           type: 'success',
-          duration: 6000
+          duration: 6000,
         });
       });
     };

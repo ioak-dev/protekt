@@ -6,7 +6,7 @@ const Notification = () => {
   const [spinner, setSpinner] = useState(false);
   const [notification, setNotification] = useState({
     type: undefined,
-    message: undefined
+    message: undefined,
   });
 
   useEffect(() => {

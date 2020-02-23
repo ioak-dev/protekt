@@ -12,7 +12,7 @@ const constants = {
   API_URL_PREFERENCES: '/user/preferences',
   API_URL_USER_DETAILS: '/user/details',
 
-  API_URL_NOTE: '/note'
+  API_URL_NOTE: '/note',
 };
 
 export default constants;

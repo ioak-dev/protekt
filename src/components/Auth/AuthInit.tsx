@@ -23,7 +23,7 @@ const AuthInit = (props: Props) => {
 };
 
 const mapStateToProps = state => ({
-  authorization: state.authorization
+  authorization: state.authorization,
 });
 
 export default connect(mapStateToProps, { getAuth, addAuth, removeAuth })(

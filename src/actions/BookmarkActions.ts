@@ -10,14 +10,14 @@ export const fetchBookmark = authorization => dispatch => {
     constants.API_URL_BOOKMARK,
     {
       headers: {
-        Authorization: `Bearer ${authorization.token}`
-      }
+        Authorization: `Bearer ${authorization.token}`,
+      },
     },
     authorization.password
   ).then(response => {
     dispatch({
       type: FETCH_BOOKMARK,
-      payload: response.data
+      payload: response.data,
     });
   });
 };
@@ -28,8 +28,8 @@ export const saveBookmark = (authorization, payload) => dispatch => {
     payload,
     {
       headers: {
-        Authorization: `Bearer ${authorization.token}`
-      }
+        Authorization: `Bearer ${authorization.token}`,
+      },
     },
     authorization.password
   )
@@ -47,8 +47,8 @@ export const saveBookmark = (authorization, payload) => dispatch => {
 export const deleteBookmark = (authorization, id) => dispatch => {
   httpDelete(`${constants.API_URL_BOOKMARK}/${id}`, {
     headers: {
-      Authorization: `Bearer ${authorization.token}`
-    }
+      Authorization: `Bearer ${authorization.token}`,
+    },
   })
     .then(function(response) {
       if (response.status === 201) {

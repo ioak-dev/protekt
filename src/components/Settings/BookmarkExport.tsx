@@ -18,8 +18,8 @@ const BookmarkExport = (props: Props) => {
       constants.API_URL_BOOKMARK,
       {
         headers: {
-          Authorization: `Bearer ${props.authorization.token}`
-        }
+          Authorization: `Bearer ${props.authorization.token}`,
+        },
       },
       props.authorization.password
     ).then(response => {
@@ -44,12 +44,12 @@ const BookmarkExport = (props: Props) => {
     sendBookmarkExportEmail(
       {
         email: props.email,
-        content: staticContent
+        content: staticContent,
       },
       {
         headers: {
-          Authorization: `Bearer ${props.authorization.token}`
-        }
+          Authorization: `Bearer ${props.authorization.token}`,
+        },
       }
     )
       .then((response: any) => {
@@ -57,7 +57,7 @@ const BookmarkExport = (props: Props) => {
           sendMessage('notification', true, {
             message: 'Check your mail for bookmark attachment',
             type: 'success',
-            duration: 3000
+            duration: 3000,
           });
         }
       })
@@ -65,7 +65,7 @@ const BookmarkExport = (props: Props) => {
         sendMessage('notification', true, {
           type: 'failure',
           message: 'Bad request',
-          duration: 3000
+          duration: 3000,
         });
       });
   };

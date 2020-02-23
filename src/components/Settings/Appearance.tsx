@@ -14,12 +14,12 @@ const Appearance = (props: Props) => {
     if (props.profile.theme === 'theme_dark') {
       props.persistProfile(props.authorization, {
         ...props.profile,
-        theme: 'theme_light'
+        theme: 'theme_light',
       });
     } else {
       props.persistProfile(props.authorization, {
         ...props.profile,
-        theme: 'theme_dark'
+        theme: 'theme_dark',
       });
     }
   };
@@ -27,14 +27,14 @@ const Appearance = (props: Props) => {
   const changeTextSize = size => {
     props.persistProfile(props.authorization, {
       ...props.profile,
-      textSize: size
+      textSize: size,
     });
   };
 
   const changeThemeColor = color => {
     props.persistProfile(props.authorization, {
       ...props.profile,
-      themeColor: color
+      themeColor: color,
     });
   };
 
