@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Home from '../Home';
 import BookmarkController from '../Bookmarks/BookmarkController';
-import Notes from '../Notes/index';
+import NoteController from '../Notes/NoteController';
 import Login from '../Auth/Login';
 import PrivateRoute from '../Auth/PrivateRoute';
 import AuthInit from '../Auth/AuthInit';
@@ -139,7 +139,11 @@ const Content = (props: Props) => {
               <PrivateRoute
                 path="/notes"
                 render={propsLocal => (
-                  <Notes {...props} {...propsLocal} logout={() => logout} />
+                  <NoteController
+                    {...props}
+                    {...propsLocal}
+                    logout={() => logout}
+                  />
                 )}
               />
               <Route

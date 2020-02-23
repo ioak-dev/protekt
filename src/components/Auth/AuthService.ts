@@ -54,6 +54,7 @@ export function signin(data, problem) {
 }
 
 export function updateUserDetails(data, authorization, type) {
+  console.log(data, authorization);
   return httpGet(constants.API_URL_PRESIGNUP, null).then(function(response) {
     if (response.status === 200) {
       let newData = {};
@@ -81,7 +82,8 @@ export function updateUserDetails(data, authorization, type) {
             Authorization: `Bearer ${authorization.token}`
           }
         },
-        authorization.password
+        authorization.password,
+        ['problem', 'solution', 'email', 'name']
       ).then(function(response) {
         return Promise.resolve(response);
       });

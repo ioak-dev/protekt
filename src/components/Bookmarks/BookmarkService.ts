@@ -1,7 +1,7 @@
 import { httpPost } from '../Lib/RestTemplate';
 import constants from '../Constants';
 
-export function importBookmarks(data, authorization) {
+const importBookmarks = (data, authorization) => {
   console.log(data);
   return httpPost(
     constants.API_URL_BOOKMARK_IMPORT,
@@ -15,4 +15,6 @@ export function importBookmarks(data, authorization) {
   ).then(function(response) {
     return Promise.resolve(response);
   });
-}
+};
+
+export default importBookmarks;

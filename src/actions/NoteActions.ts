@@ -6,14 +6,18 @@ import { sendMessage } from '../events/MessageService';
 const domain = 'note';
 
 export const fetchNote = authorization => dispatch => {
-  httpGet(constants.API_URL_NOTE, {
-    headers: {
-      Authorization: `Bearer ${authorization.token}`,
+  httpGet(
+    constants.API_URL_NOTE,
+    {
+      headers: {
+        Authorization: `Bearer ${authorization.token}`
+      }
     },
-  }).then(response => {
+    authorization.password
+  ).then(response => {
     dispatch({
       type: FETCH_NOTE,
-      payload: response.data,
+      payload: response.data
     });
   });
 };
@@ -23,11 +27,17 @@ export const saveNote = (authorization, payload) => dispatch => {
     payload.id = payload._id;
     payload._id = undefined;
   }
-  httpPut(constants.API_URL_NOTE, payload, {
-    headers: {
-      Authorization: `Bearer ${authorization.token}`,
+  httpPut(
+    constants.API_URL_NOTE,
+    payload,
+    {
+      headers: {
+        Authorization: `Bearer ${authorization.token}`
+      }
     },
-  })
+    authorization.password,
+    ['attributes']
+  )
     .then(() => {
       sendMessage(domain, true, { action: payload.id ? 'updated' : 'created' });
       dispatch(fetchNote(authorization));
@@ -42,8 +52,8 @@ export const saveNote = (authorization, payload) => dispatch => {
 export const deleteNote = (authorization, id) => dispatch => {
   httpDelete(`${constants.API_URL_NOTE}/${id}`, {
     headers: {
-      Authorization: `Bearer ${authorization.token}`,
-    },
+      Authorization: `Bearer ${authorization.token}`
+    }
   })
     .then(function(response) {
       if (response.status === 201) {
