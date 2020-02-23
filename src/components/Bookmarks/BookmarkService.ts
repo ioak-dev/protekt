@@ -1,13 +1,18 @@
 import { httpPost } from '../Lib/RestTemplate';
 import constants from '../Constants';
 
-export function importBookmarks(data, token) {
+export function importBookmarks(data, authorization) {
   console.log(data);
-  return httpPost(constants.API_URL_BOOKMARK_IMPORT, data, {
-    headers: {
-      Authorization: 'Bearer ' + token
-    }
-  }).then(function(response) {
+  return httpPost(
+    constants.API_URL_BOOKMARK_IMPORT,
+    data,
+    {
+      headers: {
+        Authorization: 'Bearer ' + authorization.token
+      }
+    },
+    authorization.password
+  ).then(function(response) {
     return Promise.resolve(response);
   });
 }

@@ -5,7 +5,7 @@ import { HashRouter } from 'react-router-dom/cjs/react-router-dom.min';
 import { connect } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Home from '../Home';
-import Bookmarks from '../Bookmarks/index';
+import BookmarkController from '../Bookmarks/BookmarkController';
 import Notes from '../Notes/index';
 import Login from '../Auth/Login';
 import PrivateRoute from '../Auth/PrivateRoute';
@@ -129,7 +129,11 @@ const Content = (props: Props) => {
               <PrivateRoute
                 path="/bookmarks"
                 render={propsLocal => (
-                  <Bookmarks {...props} {...propsLocal} logout={logout} />
+                  <BookmarkController
+                    {...props}
+                    {...propsLocal}
+                    logout={logout}
+                  />
                 )}
               />
               <PrivateRoute

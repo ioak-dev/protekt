@@ -6,24 +6,33 @@ import { sendMessage } from '../events/MessageService';
 const domain = 'bookmark';
 
 export const fetchBookmark = authorization => dispatch => {
-  httpGet(constants.API_URL_BOOKMARK, {
-    headers: {
-      Authorization: `Bearer ${authorization.token}`,
+  httpGet(
+    constants.API_URL_BOOKMARK,
+    {
+      headers: {
+        Authorization: `Bearer ${authorization.token}`
+      }
     },
-  }).then(response => {
+    authorization.password
+  ).then(response => {
     dispatch({
       type: FETCH_BOOKMARK,
-      payload: response.data,
+      payload: response.data
     });
   });
 };
 
 export const saveBookmark = (authorization, payload) => dispatch => {
-  httpPut(constants.API_URL_BOOKMARK, payload, {
-    headers: {
-      Authorization: `Bearer ${authorization.token}`,
+  httpPut(
+    constants.API_URL_BOOKMARK,
+    payload,
+    {
+      headers: {
+        Authorization: `Bearer ${authorization.token}`
+      }
     },
-  })
+    authorization.password
+  )
     .then(() => {
       sendMessage(domain, true, { action: payload.id ? 'updated' : 'created' });
       dispatch(fetchBookmark(authorization));
@@ -38,8 +47,8 @@ export const saveBookmark = (authorization, payload) => dispatch => {
 export const deleteBookmark = (authorization, id) => dispatch => {
   httpDelete(`${constants.API_URL_BOOKMARK}/${id}`, {
     headers: {
-      Authorization: `Bearer ${authorization.token}`,
-    },
+      Authorization: `Bearer ${authorization.token}`
+    }
   })
     .then(function(response) {
       if (response.status === 201) {

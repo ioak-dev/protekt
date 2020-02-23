@@ -253,7 +253,7 @@ class Settings extends React.Component<Props, State> {
         {
           content: event.target.result
         },
-        that.props.authorization.token
+        that.props.authorization
       ).then(function(response) {
         sendMessage('notification', true, {
           message:
