@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withCookies } from 'react-cookie';
 import { getAuth, addAuth, removeAuth } from '../../actions/AuthActions';
 import './Login.scss';
 import {
@@ -21,54 +22,42 @@ interface Props {
   getAuth: Function;
   addAuth: Function;
   removeAuth: Function;
+  cookies: any;
   history: any;
   location: any;
   authorization: Authorization;
 }
 
-interface State {
-  newuser: boolean;
-  name: string;
-  email: string;
-  password: string;
-  resetCode: string;
-}
+const Login = (props: Props) => {
+  const [data, setData] = useState({
+    newuser: false,
+    name: '',
+    email: '',
+    password: '',
+    resetCode: ''
+  });
 
-class Login extends Component<Props, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      newuser: false,
-      name: '',
-      email: '',
-      password: '',
-      resetCode: ''
-    };
-  }
-
-  componentDidMount() {
-    if (this.props.location.search) {
-      const query = queryString.parse(this.props.location.search);
+  useEffect(() => {
+    if (props.location.search) {
+      const query = queryString.parse(props.location.search);
       if (query && query.type === 'signup') {
-        this.setState({
-          newuser: true
-        });
+        setData({ ...data, newuser: true });
       }
     }
-  }
+  }, []);
 
-  signin = event => {
+  const signinAction = event => {
     event.preventDefault();
 
     sendMessage('notification', false);
     sendMessage('spinner');
-    if (this.state.email && this.state.password) {
-      preSignin(this.state.email).then(response => {
+    if (data.email && data.password) {
+      preSignin(data.email).then(response => {
         if (response.status === 200) {
           signin(
             {
-              email: this.state.email,
-              password: this.state.password
+              email: data.email,
+              password: data.password
             },
             response.data
           )
@@ -79,7 +68,7 @@ class Login extends Component<Props, State> {
                   type: 'success',
                   duration: 3000
                 });
-                this.success(response.data, this.state.password);
+                success(response.data, data.password);
               } else if (response.status === 401) {
                 sendMessage('notification', true, {
                   message: 'Incorrect passphrase',
@@ -119,15 +108,12 @@ class Login extends Component<Props, State> {
     }
   };
 
-  signup = event => {
+  const signupAction = event => {
     event.preventDefault();
-    const that = this;
     sendMessage('notification', false);
     sendMessage('spinner');
-    if (this.state.name && this.state.password && this.state.email) {
-      if (
-        !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)
-      ) {
+    if (data.name && data.password && data.email) {
+      if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email)) {
         sendMessage('notification', true, {
           type: 'failure',
           message: 'Email ID is invalid',
@@ -135,39 +121,39 @@ class Login extends Component<Props, State> {
         });
         return;
       }
-      preSignup().then(function(response) {
+      preSignup().then(response => {
         if (response.status === 200) {
           signup({
-            name: that.state.name,
-            password: that.state.password,
-            email: that.state.email,
+            name: data.name,
+            password: data.password,
+            email: data.email,
             solution: response.data.solution,
             salt: response.data.salt
-          }).then(function(status) {
+          }).then(status => {
             if (status === 200) {
               sendMessage('notification', true, {
                 type: 'success',
                 message: 'Your account has been created. You can login now',
                 duration: 3000
               });
-              that.toggle();
+              setData({ ...data, newuser: !data.newuser });
             }
           });
         }
       });
-    } else if (!this.state.name) {
+    } else if (!data.name) {
       sendMessage('notification', true, {
         type: 'failure',
         message: 'Name cannot be empty',
         duration: 3000
       });
-    } else if (!this.state.email) {
+    } else if (!data.email) {
       sendMessage('notification', true, {
         type: 'failure',
         message: 'Email cannot be empty',
         duration: 3000
       });
-    } else if (!this.state.password) {
+    } else if (!data.password) {
       sendMessage('notification', true, {
         type: 'failure',
         message: 'Password cannot be empty',
@@ -176,8 +162,8 @@ class Login extends Component<Props, State> {
     }
   };
 
-  sentEmailWithCode = () => {
-    if (isEmptyOrSpaces(this.state.email)) {
+  const sentEmailWithCode = () => {
+    if (isEmptyOrSpaces(data.email)) {
       sendMessage('notification', true, {
         message: 'Email cannot be empty',
         type: 'failure',
@@ -186,16 +172,16 @@ class Login extends Component<Props, State> {
       return;
     }
 
-    this.sentPasswordChangeEmail('password');
+    sentPasswordChangeEmailAction('password');
   };
 
-  sentPasswordChangeEmail = type => {
+  const sentPasswordChangeEmailAction = type => {
     const min = 1;
     const max = 100;
     const rand = min + Math.random() * (max - min);
     sentPasswordChangeEmail(
       {
-        email: this.state.email,
+        email: data.email,
         resetCode: rand
       },
       type
@@ -226,15 +212,16 @@ class Login extends Component<Props, State> {
       });
   };
 
-  handleChange = event => {
-    this.setState({
-      ...this.state,
-      [event.currentTarget.name]: event.currentTarget.value
-    });
+  const handleChange = event => {
+    setData({ ...data, [event.currentTarget.name]: event.currentTarget.value });
   };
 
-  success = (data, password) => {
-    this.props.addAuth({
+  const toggle = () => {
+    setData({ ...data, newuser: !data.newuser });
+  };
+
+  const success = (data, password) => {
+    props.addAuth({
       isAuth: true,
       token: data.token,
       secret: data.secret,
@@ -243,120 +230,102 @@ class Login extends Component<Props, State> {
       password: password
     });
     sendMessage('loggedin', true);
-    this.props.history.push('/home');
+    props.history.push('/home');
   };
 
-  toggle = () => {
-    this.setState({
-      newuser: !this.state.newuser
-    });
-  };
-
-  render() {
-    return (
-      <div className="login">
-        {!this.state.newuser && (
-          <div className="container">
-            <form method="GET" onSubmit={this.signin} noValidate>
-              <h1>Log In</h1>
-              <div className="form">
-                <OakText
-                  label="Username/e-mail"
-                  id="email"
-                  data={this.state}
-                  handleChange={e => this.handleChange(e)}
-                />
-                <OakText
-                  label="Password"
-                  id="password"
-                  type="password"
-                  data={this.state}
-                  handleChange={e => this.handleChange(e)}
-                />
-              </div>
-              <br />
-              <OakButton
-                theme="primary"
-                variant="animate in"
-                action={this.signin}
-              >
-                Sign In
-              </OakButton>
-              <br />
-              <br />
-              Don't have an account? &nbsp;{' '}
-              <OakButton
-                theme="secondary"
-                variant="outline"
-                action={this.toggle}
-              >
-                Sign Up
-              </OakButton>
-              <br />
-              <br />
-            </form>
-
-            <OakButton action={this.sentEmailWithCode}>
-              Forgot password ?
+  return (
+    <div className="login">
+      {!data.newuser && (
+        <div className="container">
+          <form method="GET" onSubmit={signinAction} noValidate>
+            <h1>Log In</h1>
+            <div className="form">
+              <OakText
+                label="Username/e-mail"
+                id="email"
+                data={data}
+                handleChange={e => handleChange(e)}
+              />
+              <OakText
+                label="Password"
+                id="password"
+                type="password"
+                data={data}
+                handleChange={e => handleChange(e)}
+              />
+            </div>
+            <br />
+            <OakButton
+              theme="primary"
+              variant="animate in"
+              action={signinAction}
+            >
+              Sign In
             </OakButton>
-          </div>
-        )}
+            <br />
+            <br />
+            Don&apos;t have an account? &nbsp;{' '}
+            <OakButton theme="secondary" variant="outline" action={toggle}>
+              Sign Up
+            </OakButton>
+            <br />
+            <br />
+          </form>
 
-        {this.state.newuser && (
-          <div className="container">
-            <form method="GET" onSubmit={this.signup} noValidate>
-              <h1>Sign Up</h1>
-              <div className="form">
-                <OakText
-                  label="Name"
-                  id="name"
-                  data={this.state}
-                  handleChange={e => this.handleChange(e)}
-                />
-                <OakText
-                  label="Email / User Name"
-                  id="email"
-                  data={this.state}
-                  handleChange={e => this.handleChange(e)}
-                />
-                <OakText
-                  label="Password"
-                  id="password"
-                  type="password"
-                  data={this.state}
-                  handleChange={e => this.handleChange(e)}
-                />
-              </div>
-              <br />
-              <OakButton
-                theme="primary"
-                variant="animate in"
-                action={this.signup}
-              >
-                Create account
-              </OakButton>
-              <br />
-              <br />
-              Already have a account? &nbsp;{' '}
-              <OakButton
-                theme="secondary"
-                variant="outline"
-                action={this.toggle}
-              >
-                Sign In
-              </OakButton>
-            </form>
-          </div>
-        )}
-      </div>
-    );
-  }
-}
+          <OakButton action={sentEmailWithCode}>Forgot password ?</OakButton>
+        </div>
+      )}
+
+      {data.newuser && (
+        <div className="container">
+          <form method="GET" onSubmit={signupAction} noValidate>
+            <h1>Sign Up</h1>
+            <div className="form">
+              <OakText
+                label="Name"
+                id="name"
+                data={data}
+                handleChange={e => handleChange(e)}
+              />
+              <OakText
+                label="Email / User Name"
+                id="email"
+                data={data}
+                handleChange={e => handleChange(e)}
+              />
+              <OakText
+                label="Password"
+                id="password"
+                type="password"
+                data={data}
+                handleChange={e => handleChange(e)}
+              />
+            </div>
+            <br />
+            <OakButton
+              theme="primary"
+              variant="animate in"
+              action={signupAction}
+            >
+              Create account
+            </OakButton>
+            <br />
+            <br />
+            Already have a account? &nbsp;{' '}
+            <OakButton theme="secondary" variant="outline" action={toggle}>
+              Sign In
+            </OakButton>
+          </form>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const mapStateToProps = state => ({
   authorization: state.authorization
 });
 
 export default connect(mapStateToProps, { getAuth, addAuth, removeAuth })(
-  Login
+  withCookies(Login)
 );

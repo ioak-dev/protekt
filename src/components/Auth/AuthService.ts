@@ -1,6 +1,6 @@
-import { httpGet, httpPost, httpPut } from '../Lib/RestTemplate';
 import sjcl from 'ioak-sjcl';
 import CryptoJS from 'crypto-js';
+import { httpGet, httpPost, httpPut } from '../Lib/RestTemplate';
 import constants from '../Constants';
 
 export function preSignup() {
@@ -32,12 +32,12 @@ export function preSignin(email) {
 
 export function signin(data, problem) {
   try {
-    let solution = decrypt(data.password, JSON.stringify(problem));
+    const solution = decrypt(data.password, JSON.stringify(problem));
     return httpPost(
       constants.API_URL_SIGNIN,
       {
         email: data.email,
-        solution: solution
+        solution
       },
       null
     ).then(function(response) {
@@ -48,9 +48,8 @@ export function signin(data, problem) {
       return Promise.resolve({
         status: 401
       });
-    } else {
-      return Promise.resolve(error);
     }
+    return Promise.resolve(error);
   }
 }
 
@@ -79,7 +78,7 @@ export function updateUserDetails(data, authorization, type) {
         newData,
         {
           headers: {
-            Authorization: 'Bearer ' + authorization.token
+            Authorization: `Bearer ${authorization.token}`
           }
         },
         authorization.password
