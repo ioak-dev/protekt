@@ -418,56 +418,50 @@ class Settings extends React.Component<Props, State> {
               <div>
                 <div
                   className="theme-color color-1"
-                  onClick={() => this.changeThemeColor('themecolor_1')}
+                  onClick={() => this.changeThemeColor('themecolor1')}
                 >
                   <i className="material-icons">
-                    {this.props.profile.themeColor === 'themecolor_1' &&
-                      'check'}
+                    {this.props.profile.themeColor === 'themecolor1' && 'check'}
                   </i>
                 </div>
                 <div
                   className="theme-color color-2"
-                  onClick={() => this.changeThemeColor('themecolor_2')}
+                  onClick={() => this.changeThemeColor('themecolor2')}
                 >
                   <i className="material-icons">
-                    {this.props.profile.themeColor === 'themecolor_2' &&
-                      'check'}
+                    {this.props.profile.themeColor === 'themecolor2' && 'check'}
                   </i>
                 </div>
                 <div
                   className="theme-color color-3"
-                  onClick={() => this.changeThemeColor('themecolor_3')}
+                  onClick={() => this.changeThemeColor('themecolor3')}
                 >
                   <i className="material-icons">
-                    {this.props.profile.themeColor === 'themecolor_3' &&
-                      'check'}
+                    {this.props.profile.themeColor === 'themecolor3' && 'check'}
                   </i>
                 </div>
                 <div
                   className="theme-color color-4"
-                  onClick={() => this.changeThemeColor('themecolor_4')}
+                  onClick={() => this.changeThemeColor('themecolor4')}
                 >
                   <i className="material-icons">
-                    {this.props.profile.themeColor === 'themecolor_4' &&
-                      'check'}
+                    {this.props.profile.themeColor === 'themecolor4' && 'check'}
                   </i>
                 </div>
                 <div
                   className="theme-color color-5"
-                  onClick={() => this.changeThemeColor('themecolor_5')}
+                  onClick={() => this.changeThemeColor('themecolor5')}
                 >
                   <i className="material-icons">
-                    {this.props.profile.themeColor === 'themecolor_5' &&
-                      'check'}
+                    {this.props.profile.themeColor === 'themecolor5' && 'check'}
                   </i>
                 </div>
                 <div
                   className="theme-color color-6"
-                  onClick={() => this.changeThemeColor('themecolor_6')}
+                  onClick={() => this.changeThemeColor('themecolor6')}
                 >
                   <i className="material-icons">
-                    {this.props.profile.themeColor === 'themecolor_6' &&
-                      'check'}
+                    {this.props.profile.themeColor === 'themecolor6' && 'check'}
                   </i>
                 </div>
               </div>

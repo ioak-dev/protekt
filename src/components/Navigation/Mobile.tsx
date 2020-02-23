@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 
 import './style.scss';
-import protekt_white from '../../images/protekt_white.svg';
-import protekt_black from '../../images/protekt_black.svg';
+import protektWhite from '../../images/protekt_white.svg';
+import protektBlack from '../../images/protekt_black.svg';
 import Links from './Links';
 import { Authorization, Profile } from '../Types/GeneralTypes';
 import OakButton from '../../oakui/OakButton';
@@ -21,127 +21,99 @@ interface Props {
   toggleSettings: any;
 }
 
-interface State {
-  menu: boolean;
-}
+const Mobile = (props: Props) => {
+  const [menu, setMenu] = useState(false);
 
-class Mobile extends Component<Props, State> {
-  constructor(props) {
-    super(props);
-    this.props.getProfile();
-    this.state = {
-      menu: false
-    };
-  }
+  useEffect(() => {
+    props.getProfile();
+  }, []);
 
-  toggleMenu = () => {
-    this.setState({
-      menu: !this.state.menu
-    });
-  };
-
-  signin = type => {
-    this.props.login(type);
-  };
-
-  render() {
-    return (
-      <>
-        <div
-          className={
-            this.props.transparent
-              ? 'navbar mobile transparent'
-              : 'navbar mobile'
-          }
-        >
-          <div className="left">
-            {!this.props.transparent &&
-              this.props.profile.theme === 'theme_light' && (
-                <img className="logo" src={protekt_black} alt="Protekt logo" />
-              )}
-            {(this.props.transparent ||
-              this.props.profile.theme === 'theme_dark') && (
-              <img className="logo" src={protekt_white} alt="Protekt logo" />
-            )}
-            {/* links */}
-          </div>
-          <div className="right">
-            {/* <div className="settings-icon" onClick={this.props.toggleSettings}><i className="material-icons">settings</i></div> */}
-            <div
-              className={this.state.menu ? 'menu active' : 'menu'}
-              onClick={this.toggleMenu}
-            >
-              <div></div>
-            </div>
-            {/* action login */}
-          </div>
+  return (
+    <>
+      <div
+        className={
+          props.transparent ? 'navbar mobile transparent' : 'navbar mobile'
+        }
+      >
+        <div className="left">
+          {!props.transparent && props.profile.theme === 'theme_light' && (
+            <img className="logo" src={protektBlack} alt="Curate logo" />
+          )}
+          {(props.transparent || props.profile.theme === 'theme_dark') && (
+            <img className="logo" src={protektWhite} alt="Curate logo" />
+          )}
+          {/* links */}
         </div>
-        <div
-          className={this.state.menu ? 'slider show' : 'slider hide'}
-          onClick={this.toggleMenu}
-        >
+        <div className="right">
+          {/* <div className="settings-icon" onClick={props.toggleSettings}><i className="material-icons">settings</i></div> */}
           <div
-            className={this.state.menu ? 'container' : 'container hidetext'}
-            onClick={this.toggleMenu}
+            className={menu ? 'menu active' : 'menu'}
+            onClick={() => setMenu(!menu)}
           >
-            <div className="action">
-              <div
-                className="settings-icon"
-                onClick={this.props.toggleSettings}
-              >
-                {this.props.authorization.isAuth && (
-                  <OakButton
-                    theme="default"
-                    variant="outline"
-                    small
-                    action={this.props.toggleSettings}
-                  >
-                    <i className="material-icons">brush</i>Appearance
-                  </OakButton>
-                )}
-              </div>
-              <div className="buttons">
-                {this.props.authorization.isAuth && (
-                  <OakButton
-                    theme="default"
-                    variant="outline"
-                    small
-                    action={this.props.logout()}
-                  >
-                    <i className="material-icons">power_settings_new</i>Logout
-                  </OakButton>
-                )}
-                {!this.props.authorization.isAuth && (
-                  <OakButton
-                    theme="secondary"
-                    variant="animate none"
-                    small
-                    action={() => this.signin('signin')}
-                  >
-                    <i className="material-icons">person</i>Login
-                  </OakButton>
-                )}
-                {!this.props.authorization.isAuth && (
-                  <OakButton
-                    theme="secondary"
-                    variant="animate none"
-                    small
-                    action={() => this.signin('signup')}
-                  >
-                    <i className="material-icons">person_add</i>Signup
-                  </OakButton>
-                )}
-              </div>
-            </div>
-            <Links
-              authorization={this.props.authorization}
-              profile={this.props.profile}
-            />
+            <div />
           </div>
+          {/* action login */}
         </div>
-      </>
-    );
-  }
-}
+      </div>
+      <div
+        className={menu ? 'slider show' : 'slider hide'}
+        onClick={() => setMenu(!menu)}
+      >
+        <div
+          className={menu ? 'container' : 'container hidetext'}
+          onClick={() => setMenu(!menu)}
+        >
+          <div className="action">
+            <div className="settings-icon" onClick={props.toggleSettings}>
+              {props.authorization.isAuth && (
+                <OakButton
+                  theme="default"
+                  variant="outline"
+                  small
+                  action={props.toggleSettings}
+                >
+                  <i className="material-icons">brush</i>Appearance
+                </OakButton>
+              )}
+            </div>
+            <div className="buttons">
+              {props.authorization.isAuth && (
+                <OakButton
+                  theme="default"
+                  variant="outline"
+                  small
+                  action={props.logout()}
+                >
+                  <i className="material-icons">power_settings_new</i>Logout
+                </OakButton>
+              )}
+              {!props.authorization.isAuth && (
+                <OakButton
+                  theme="secondary"
+                  variant="animate none"
+                  small
+                  action={() => props.login('signin')}
+                >
+                  <i className="material-icons">person</i>Login
+                </OakButton>
+              )}
+              {!props.authorization.isAuth && (
+                <OakButton
+                  theme="secondary"
+                  variant="animate none"
+                  small
+                  action={() => props.login('signup')}
+                >
+                  <i className="material-icons">person_add</i>Signup
+                </OakButton>
+              )}
+            </div>
+          </div>
+          <Links authorization={props.authorization} profile={props.profile} />
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default Mobile;
