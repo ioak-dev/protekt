@@ -8,7 +8,7 @@ import {
   signin,
   sentPasswordChangeEmail,
   preSignup,
-  preSignin
+  preSignin,
 } from './AuthService';
 import { Authorization } from '../Types/GeneralTypes';
 import { sendMessage } from '../../events/MessageService';
@@ -34,7 +34,7 @@ const Login = (props: Props) => {
     name: '',
     email: '',
     password: '',
-    resetCode: ''
+    resetCode: '',
   });
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Login = (props: Props) => {
           signin(
             {
               email: data.email,
-              password: data.password
+              password: data.password,
             },
             response.data
           )
@@ -66,21 +66,21 @@ const Login = (props: Props) => {
                 sendMessage('notification', true, {
                   message: 'Signed In successfully',
                   type: 'success',
-                  duration: 3000
+                  duration: 3000,
                 });
                 success(response.data, data.password);
               } else if (response.status === 401) {
                 sendMessage('notification', true, {
                   message: 'Incorrect passphrase',
                   type: 'failure',
-                  duration: 3000
+                  duration: 3000,
                 });
               } else {
                 sendMessage('notification', true, {
                   message:
                     'Unknown response from server. Please try again or at a later time',
                   type: 'failure',
-                  duration: 3000
+                  duration: 3000,
                 });
               }
             })
@@ -88,14 +88,14 @@ const Login = (props: Props) => {
               sendMessage('notification', true, {
                 type: 'failure',
                 message: 'Unknown error. Please try again or at a later time',
-                duration: 3000
+                duration: 3000,
               });
             });
         } else if (response.status === 404) {
           sendMessage('notification', true, {
             message: 'User name does not exist',
             type: 'failure',
-            duration: 3000
+            duration: 3000,
           });
         }
       });
@@ -103,7 +103,7 @@ const Login = (props: Props) => {
       sendMessage('notification', true, {
         type: 'failure',
         message: 'Username/password cannot be empty',
-        duration: 3000
+        duration: 3000,
       });
     }
   };
@@ -117,7 +117,7 @@ const Login = (props: Props) => {
         sendMessage('notification', true, {
           type: 'failure',
           message: 'Email ID is invalid',
-          duration: 3000
+          duration: 3000,
         });
         return;
       }
@@ -128,13 +128,13 @@ const Login = (props: Props) => {
             password: data.password,
             email: data.email,
             solution: response.data.solution,
-            salt: response.data.salt
+            salt: response.data.salt,
           }).then(status => {
             if (status === 200) {
               sendMessage('notification', true, {
                 type: 'success',
                 message: 'Your account has been created. You can login now',
-                duration: 3000
+                duration: 3000,
               });
               setData({ ...data, newuser: !data.newuser });
             }
@@ -145,19 +145,19 @@ const Login = (props: Props) => {
       sendMessage('notification', true, {
         type: 'failure',
         message: 'Name cannot be empty',
-        duration: 3000
+        duration: 3000,
       });
     } else if (!data.email) {
       sendMessage('notification', true, {
         type: 'failure',
         message: 'Email cannot be empty',
-        duration: 3000
+        duration: 3000,
       });
     } else if (!data.password) {
       sendMessage('notification', true, {
         type: 'failure',
         message: 'Password cannot be empty',
-        duration: 3000
+        duration: 3000,
       });
     }
   };
@@ -167,7 +167,7 @@ const Login = (props: Props) => {
       sendMessage('notification', true, {
         message: 'Email cannot be empty',
         type: 'failure',
-        duration: 5000
+        duration: 5000,
       });
       return;
     }
@@ -182,7 +182,7 @@ const Login = (props: Props) => {
     sentPasswordChangeEmail(
       {
         email: data.email,
-        resetCode: rand
+        resetCode: rand,
       },
       type
     )
@@ -192,14 +192,14 @@ const Login = (props: Props) => {
             sendMessage('notification', true, {
               message: 'Password sent successfully',
               type: 'success',
-              duration: 3000
+              duration: 3000,
             });
           }
         } else {
           sendMessage('notification', true, {
             type: 'failure',
             message: 'Invalid Email error',
-            duration: 3000
+            duration: 3000,
           });
         }
       })
@@ -207,7 +207,7 @@ const Login = (props: Props) => {
         sendMessage('notification', true, {
           type: 'failure',
           message: 'Bad request',
-          duration: 3000
+          duration: 3000,
         });
       });
   };
@@ -227,7 +227,7 @@ const Login = (props: Props) => {
       secret: data.secret,
       name: data.name,
       email: data.email,
-      password: password
+      password,
     });
     sendMessage('loggedin', true);
     props.history.push('/home');
@@ -323,7 +323,7 @@ const Login = (props: Props) => {
 };
 
 const mapStateToProps = state => ({
-  authorization: state.authorization
+  authorization: state.authorization,
 });
 
 export default connect(mapStateToProps, { getAuth, addAuth, removeAuth })(

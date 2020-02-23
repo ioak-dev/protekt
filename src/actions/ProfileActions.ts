@@ -4,7 +4,7 @@ import { GET_PROFILE, SET_PROFILE } from './types';
 
 export const getProfile = () => dispatch => {
   dispatch({
-    type: GET_PROFILE
+    type: GET_PROFILE,
   });
 };
 
@@ -13,15 +13,15 @@ export const reloadProfile = authorization => dispatch => {
     constants.API_URL_PREFERENCES,
     {
       headers: {
-        Authorization: 'Bearer ' + authorization.token
-      }
+        Authorization: `Bearer ${authorization.token}`,
+      },
     },
     authorization.password
   ).then(function(response) {
     console.log(response);
     dispatch({
       type: SET_PROFILE,
-      payload: response.data
+      payload: response.data,
     });
   });
 };
@@ -32,14 +32,14 @@ export const persistProfile = (authorization, payload) => dispatch => {
     payload,
     {
       headers: {
-        Authorization: 'Bearer ' + authorization.token
-      }
+        Authorization: `Bearer ${authorization.token}`,
+      },
     },
     authorization.password
   ).then(function(response) {
     dispatch({
       type: SET_PROFILE,
-      payload: response.data
+      payload: response.data,
     });
   });
 };
@@ -47,6 +47,6 @@ export const persistProfile = (authorization, payload) => dispatch => {
 export const setProfile = payload => dispatch => {
   dispatch({
     type: SET_PROFILE,
-    payload: payload
+    payload,
   });
 };

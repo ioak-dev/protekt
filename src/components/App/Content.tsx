@@ -22,24 +22,24 @@ import { sendMessage, receiveMessage } from '../../events/MessageService';
 import ResetPassword from '../Auth/ResetPassword';
 
 const themes = {
-  themecolor_1: getTheme('#C4005B'),
-  themecolor_2: getTheme('#803BC2'),
-  themecolor_3: getTheme('#E74443'),
-  themecolor_4: getTheme('#29BE3B'),
-  themecolor_5: getTheme('#ffe20f'),
-  themecolor_6: getTheme('#4d4dff')
+  themecolor1: getTheme('#C4005B'),
+  themecolor2: getTheme('#803BC2'),
+  themecolor3: getTheme('#E74443'),
+  themecolor4: getTheme('#29BE3B'),
+  themecolor5: getTheme('#ffe20f'),
+  themecolor6: getTheme('#4d4dff'),
 };
 
 function getTheme(color) {
   return createMuiTheme({
     palette: {
       primary: {
-        main: color
+        main: color,
       },
       secondary: {
-        main: color
-      }
-    }
+        main: color,
+      },
+    },
   });
 }
 
@@ -80,7 +80,7 @@ const Content = (props: Props) => {
     sendMessage('notification', true, {
       type,
       message,
-      duration: 3000
+      duration: 3000,
     });
     sendMessage('loggedout', true);
   };
@@ -162,12 +162,12 @@ const Content = (props: Props) => {
 
 const mapStateToProps = state => ({
   authorization: state.authorization,
-  profile: state.profile
+  profile: state.profile,
 });
 
 export default connect(mapStateToProps, {
   getAuth,
   addAuth,
   removeAuth,
-  getProfile
+  getProfile,
 })(Content);

@@ -11,8 +11,6 @@ interface Props {
   logout: Function;
 }
 
-interface State {}
-
 const Home = (props: Props) => {
   useEffect(() => {
     sendMessage('navbar-transparency');
