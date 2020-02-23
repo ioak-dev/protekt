@@ -61,9 +61,12 @@ export function httpPut(
   skipFields: Array<string> = []
 ) {
   if (!unprotectedEndpoints.find(item => endpoint.includes(item))) {
+    console.log(payload, password);
     payload = encryptContent(payload, password, skipFields);
+    console.log(payload);
   }
   return axios.put(baseUrl + endpoint, payload, headers).then(response => {
+    console.log(response);
     if (!unprotectedEndpoints.find(item => endpoint.includes(item))) {
       response.data = decryptContent(response.data, password, skipFields);
     }

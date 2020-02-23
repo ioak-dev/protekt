@@ -5,6 +5,7 @@ const initialState = {
   token: '',
   secret: '',
   name: '',
+  email: '',
   password: '',
 };
 

@@ -31,7 +31,7 @@ const Settings = (props: Props) => {
   const [email, setEmail] = useState('');
 
   useEffect(() => {
-    setEmail(props.cookies.get('email'));
+    setEmail(props.authorization.email ? props.authorization.email : '');
   }, []);
 
   const updateUserDetailsImpl = (user, type) => {

@@ -1,8 +1,8 @@
 export interface Authorization {
   isAuth: boolean;
   token?: string;
-  firstname?: string;
-  lastname?: string;
+  name?: string;
+  email?: string;
   password?: string;
 }
 
