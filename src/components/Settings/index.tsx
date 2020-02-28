@@ -7,8 +7,8 @@ import {
   persistProfile,
 } from '../../actions/ProfileActions';
 import './style.scss';
-import View from '../../oakui/View';
-import ViewResolver from '../../oakui/ViewResolver';
+import OakView from '../../oakui/OakView';
+import OakViewResolver from '../../oakui/OakViewResolver';
 import { updateUserDetails } from '../Auth/AuthService';
 import { Authorization, Profile } from '../Types/GeneralTypes';
 import { sendMessage } from '../../events/MessageService';
@@ -80,8 +80,8 @@ const Settings = (props: Props) => {
 
   return (
     <div className="settings">
-      <ViewResolver sideLabel="More options">
-        <View main>
+      <OakViewResolver sideLabel="More options">
+        <OakView main>
           <BookmarkImport authorization={props.authorization} />
           <BookmarkExport authorization={props.authorization} email={email} />
           <Appearance
@@ -98,8 +98,8 @@ const Settings = (props: Props) => {
             updateUserDetailsImpl={updateUserDetailsImpl}
             email={email}
           />
-        </View>
-      </ViewResolver>
+        </OakView>
+      </OakViewResolver>
     </div>
   );
 };

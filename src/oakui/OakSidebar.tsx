@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Sidebar.scss';
+import './styles/oak-sidebar.scss';
 import { sendMessage, receiveMessage } from '../events/MessageService';
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
   children?: any;
 }
 
-const Sidebar = (props: Props) => {
+const OakSidebar = (props: Props) => {
   const [show, setShow] = useState(false);
   const [elementList, setElementList] = useState([{}]);
 
@@ -36,8 +36,9 @@ const Sidebar = (props: Props) => {
     return () => eventBus.unsubscribe();
   }, []);
 
+  let key = 0;
   const elements = elementList.map((item: any) => (
-    <div key={item.label} className="element" onClick={item.action}>
+    <div key={(key += 1)} className="element" onClick={item.action}>
       <i className="material-icons">{item.icon}</i>
       {item.label}
     </div>
@@ -76,4 +77,4 @@ const Sidebar = (props: Props) => {
   );
 };
 
-export default Sidebar;
+export default OakSidebar;

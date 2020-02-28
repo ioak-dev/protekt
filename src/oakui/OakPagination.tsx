@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './OakPagination.scss';
+import './styles/oak-pagination.scss';
 import OakSelect from './OakSelect';
 
 interface Props {

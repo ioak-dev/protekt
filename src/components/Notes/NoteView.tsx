@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Switch } from '@material-ui/core';
 import NoteItem from './NoteItem';
 import OakDialog from '../../oakui/OakDialog';
-import ViewResolver from '../../oakui/ViewResolver';
-import View from '../../oakui/View';
+import OakViewResolver from '../../oakui/OakViewResolver';
+import OakView from '../../oakui/OakView';
 import './style.scss';
-import Sidebar from '../../oakui/Sidebar';
+import OakSidebar from '../../oakui/OakSidebar';
 import OakText from '../../oakui/OakText';
 import OakButton from '../../oakui/OakButton';
 import { receiveMessage, sendMessage } from '../../events/MessageService';
@@ -180,8 +180,8 @@ const NoteView = (props: Props) => {
         </div>
       </OakDialog>
 
-      <ViewResolver>
-        <View main>
+      <OakViewResolver>
+        <OakView main>
           {(props.note?._id || props.note?.id) && (
             <NoteItem
               note={props.note}
@@ -193,17 +193,17 @@ const NoteView = (props: Props) => {
               handleChange={e => props.handleNoteDataChange(e)}
             />
           )}
-        </View>
-        <View side>
+        </OakView>
+        <OakView side>
           <div className="filter-container">
             <div className="section-main">
-              <Sidebar
+              <OakSidebar
                 label="Add New"
                 elements={sidebarElements.addNew}
                 icon="add"
                 animate
               />
-              <Sidebar
+              <OakSidebar
                 label="Search"
                 icon="search"
                 animate
@@ -274,9 +274,9 @@ const NoteView = (props: Props) => {
                     </OakButton>
                   </div>
                 </div>
-              </Sidebar>
+              </OakSidebar>
 
-              <Sidebar
+              <OakSidebar
                 label={
                   props.searchPref.filtered ? 'Search results' : 'All Notes'
                 }
@@ -344,11 +344,11 @@ const NoteView = (props: Props) => {
                     />
                   </div>
                 ))}
-              </Sidebar>
+              </OakSidebar>
             </div>
           </div>
-        </View>
-      </ViewResolver>
+        </OakView>
+      </OakViewResolver>
     </div>
   );
 };

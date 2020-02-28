@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './OakTable.scss';
+import './styles/oak-table.scss';
 import OakPagination from './OakPagination';
 
 interface Props {
@@ -136,25 +136,21 @@ const OakTable = (props: Props) => {
               <tr>
                 {props.header &&
                   props.header.map(item => (
-                    <>
-                      <th key={item.key}>
-                        <div className="label" onClick={() => sort(item.key)}>
-                          {item.label}
-                          {paginationPref.sortField === item.key &&
-                            paginationPref.sortAsc && (
-                              <i className="material-icons">
-                                keyboard_arrow_up
-                              </i>
-                            )}
-                          {paginationPref.sortField === item.key &&
-                            !paginationPref.sortAsc && (
-                              <i className="material-icons">
-                                keyboard_arrow_down
-                              </i>
-                            )}
-                        </div>
-                      </th>
-                    </>
+                    <th key={item.key}>
+                      <div className="label" onClick={() => sort(item.key)}>
+                        {item.label}
+                        {paginationPref.sortField === item.key &&
+                          paginationPref.sortAsc && (
+                            <i className="material-icons">keyboard_arrow_up</i>
+                          )}
+                        {paginationPref.sortField === item.key &&
+                          !paginationPref.sortAsc && (
+                            <i className="material-icons">
+                              keyboard_arrow_down
+                            </i>
+                          )}
+                      </div>
+                    </th>
                   ))}
               </tr>
             </thead>
@@ -164,22 +160,18 @@ const OakTable = (props: Props) => {
                   <tr key={(key += 1)}>
                     {props.header &&
                       props.header.map(column => (
-                        <>
-                          {(!headerMap[column.key]?.dtype ||
-                            headerMap[column.key]?.dtype === 'string') && (
-                            <td key={(key += 1)}>{row[column.key]}</td>
-                          )}
-                          {headerMap[column.key]?.dtype === 'date' && (
-                            <td key={(key += 1)} className="date">
-                              {formatDate(row[column.key])}
-                            </td>
-                          )}
-                          {headerMap[column.key]?.dtype === 'number' && (
-                            <td key={(key += 1)} className="number">
-                              {row[column.key]}
-                            </td>
-                          )}
-                        </>
+                        <td
+                          key={(key += 1)}
+                          className={
+                            headerMap[column.key]?.dtype
+                              ? headerMap[column.key]?.dtype
+                              : ''
+                          }
+                        >
+                          {headerMap[column.key]?.dtype === 'date'
+                            ? formatDate(row[column.key])
+                            : row[column.key]}
+                        </td>
                       ))}
                   </tr>
                 ))}

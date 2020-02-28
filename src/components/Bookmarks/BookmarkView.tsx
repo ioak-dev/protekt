@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Switch } from '@material-ui/core';
 import BookmarkItem from './BookmarkItem';
 import OakDialog from '../../oakui/OakDialog';
-import ViewResolver from '../../oakui/ViewResolver';
-import View from '../../oakui/View';
+import OakViewResolver from '../../oakui/OakViewResolver';
+import OakView from '../../oakui/OakView';
 import './style.scss';
-import Sidebar from '../../oakui/Sidebar';
+import OakSidebar from '../../oakui/OakSidebar';
 import OakText from '../../oakui/OakText';
 import OakButton from '../../oakui/OakButton';
 import { receiveMessage, sendMessage } from '../../events/MessageService';
@@ -126,8 +126,8 @@ const BookmarkView = (props: Props) => {
         </div>
       </OakDialog>
 
-      <ViewResolver>
-        <View main>
+      <OakViewResolver>
+        <OakView main>
           <OakPagination
             totalRows={props.view.length}
             onChangePage={onChangePage}
@@ -151,17 +151,17 @@ const BookmarkView = (props: Props) => {
                 <br />
               </div>
             ))}
-        </View>
-        <View side>
+        </OakView>
+        <OakView side>
           <div className="filter-container">
             <div className="section-main">
-              <Sidebar
+              <OakSidebar
                 label="Add New"
                 elements={sidebarElements.addNew}
                 icon="add"
                 animate
               />
-              <Sidebar
+              <OakSidebar
                 label="Search"
                 icon="search"
                 animate
@@ -225,11 +225,11 @@ const BookmarkView = (props: Props) => {
                     </OakButton>
                   </div>
                 </div>
-              </Sidebar>
+              </OakSidebar>
             </div>
           </div>
-        </View>
-      </ViewResolver>
+        </OakView>
+      </OakViewResolver>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './oak-select-notch.scss';
+import './styles/oak-select-notch.scss';
 
 interface Props {
   id: string;

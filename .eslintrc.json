@@ -52,7 +52,8 @@
     "@typescript-eslint/no-var-requires": "off",
     "no-shadow": "off",
     "consistent-return": "off",
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+    "jsx-a11y/label-has-associated-control": "off"
     // "import/extensions": [
     //   "error",
     //   "ignorePackages",

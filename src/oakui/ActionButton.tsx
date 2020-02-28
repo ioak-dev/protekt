@@ -1,5 +1,5 @@
 import React from 'react';
-import './ActionButton.scss';
+import './styles/ActionButton.scss';
 
 interface Props {
   icon?: string;

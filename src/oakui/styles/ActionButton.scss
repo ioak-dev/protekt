@@ -9,7 +9,9 @@
     font-size: 1em;
     height: 30px;
     margin: 4px;
-    &.center, &.left, &.right {
+    &.center,
+    &.left,
+    &.right {
       padding-left: 10px;
       padding-right: 10px;
       padding-top: 5px;
@@ -49,7 +51,7 @@
     .material-icons {
       vertical-align: middle;
       margin-right: 5px;
-      font-size: 1.2em
+      font-size: 1.2em;
     }
   }
 }

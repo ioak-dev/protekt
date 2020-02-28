@@ -1,5 +1,5 @@
 import React from 'react';
-import './oak-text-notch.scss';
+import './styles/oak-text-notch.scss';
 
 interface Props {
   label: string;

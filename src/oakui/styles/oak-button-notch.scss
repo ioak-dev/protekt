@@ -5,7 +5,14 @@ button {
     --clip-radius: 10px;
 
     // border-radius: 100px;
-    clip-path: polygon(0 var(--clip-radius), 10px 0, 100% 0, 100% calc(100% - var(--clip-radius)), calc(100% - var(--clip-radius)) 100%, 0 100%);
+    clip-path: polygon(
+      0 var(--clip-radius),
+      10px 0,
+      100% 0,
+      100% calc(100% - var(--clip-radius)),
+      calc(100% - var(--clip-radius)) 100%,
+      0 100%
+    );
     // clip-path: polygon(92.32051% 40%, 93.79385% 43.1596%, 94.69616% 46.52704%, 95% 50%, 94.69616% 53.47296%, 93.79385% 56.8404%, 92.32051% 60%, 79.82051% 81.65064%, 77.82089% 84.50639%, 75.35575% 86.97152%, 72.5% 88.97114%, 69.3404% 90.44449%, 65.97296% 91.34679%, 62.5% 91.65064%, 37.5% 91.65064%, 34.02704% 91.34679%, 30.6596% 90.44449%, 27.5% 88.97114%, 24.64425% 86.97152%, 22.17911% 84.50639%, 20.17949% 81.65064%, 7.67949% 60%, 6.20615% 56.8404%, 5.30384% 53.47296%, 5% 50%, 5.30384% 46.52704%, 6.20615% 43.1596%, 7.67949% 40%, 20.17949% 18.34936%, 22.17911% 15.49361%, 24.64425% 13.02848%, 27.5% 11.02886%, 30.6596% 9.55551%, 34.02704% 8.65321%, 37.5% 8.34936%, 62.5% 8.34936%, 65.97296% 8.65321%, 69.3404% 9.55551%, 72.5% 11.02886%, 75.35575% 13.02848%, 77.82089% 15.49361%, 79.82051% 18.34936%);
     // clip-path: polygon(calc(50% + 5px) 0, 2em 1em, 10em 14em);
     // Initialize colors based on theme
@@ -59,7 +66,7 @@ button {
     overflow: hidden;
     z-index: 0;
     border: 2px solid var(--color-bg);
-    
+
     padding: 8px 16px;
 
     &.small {
@@ -78,14 +85,14 @@ button {
       margin-left: 5px;
       margin-right: 5px;
     }
-    
-    // Slider animation defaulted to right    
+
+    // Slider animation defaulted to right
     &.animate {
       &.in {
         &:hover {
           color: var(--color-fg-hover);
           background-color: var(--color-bg);
-          transition: 0.2s cubic-bezier(.5,1.6,.4,.7);
+          transition: 0.2s cubic-bezier(0.5, 1.6, 0.4, 0.7);
         }
       }
 
@@ -101,7 +108,7 @@ button {
       &.none {
       }
     }
-    
+
     &.block {
       border: 2px solid transparent;
       &:hover {
@@ -109,7 +116,7 @@ button {
         background-color: var(--color-bg);
       }
     }
-    
+
     &.outline {
       border: 2px solid transparent;
       color: var(--color-fg);
@@ -121,7 +128,7 @@ button {
     &.disabled {
       border: none;
     }
-      
+
     &.icon {
       height: 38px;
       width: 38px;
@@ -137,8 +144,7 @@ button {
     .material-icons {
       vertical-align: middle;
       margin-right: 5px;
-      font-size: 1.2em
+      font-size: 1.2em;
     }
   }
 }
-  

@@ -1,5 +1,5 @@
 import React, { useEffect, ReactNode } from 'react';
-import './OakDialog.scss';
+import './styles/oak-dialog.scss';
 import { sendMessage } from '../events/MessageService';
 
 interface Props {

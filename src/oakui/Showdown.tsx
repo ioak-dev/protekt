@@ -1,6 +1,6 @@
 import React from 'react';
 import showdown from 'showdown';
-import './Showdown.scss';
+import './styles/Showdown.scss';
 
 interface Props {
   source: string;

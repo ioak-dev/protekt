@@ -6,7 +6,7 @@ interface Props {
   children?: any;
 }
 
-const View = (props: Props) => {
+const OakView = (props: Props) => {
   return (
     <div>
       {/* {this.props} */}
@@ -15,4 +15,4 @@ const View = (props: Props) => {
   );
 };
 
-export default View;
+export default OakView;

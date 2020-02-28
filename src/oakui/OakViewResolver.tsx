@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './ViewResolver.scss';
+import './styles/oak-view-resolver.scss';
 import { sendMessage, receiveMessage } from '../events/MessageService';
 import OakButton from './OakButton';
 
@@ -8,7 +8,7 @@ interface Props {
   children: any;
 }
 
-const ViewResolver = (props: Props) => {
+const OakViewResolver = (props: Props) => {
   const [mobileViewPort, setMobileViewPort] = useState(false);
 
   const [showSide, setShowSide] = useState(false);
@@ -102,4 +102,4 @@ const ViewResolver = (props: Props) => {
   );
 };
 
-export default ViewResolver;
+export default OakViewResolver;

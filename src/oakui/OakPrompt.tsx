@@ -1,5 +1,5 @@
 import React from 'react';
-import './OakDialog.scss';
+import './styles/oak-dialog.scss';
 import OakDialog from './OakDialog';
 import OakButton from './OakButton';
 
