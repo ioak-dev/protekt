@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import store from '../../store';
 import './style.scss';
@@ -6,14 +6,12 @@ import './button-notched.scss';
 import './metric.scss';
 import Content from './Content';
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Content {...this.props} />
-      </Provider>
-    );
-  }
-}
+const App = props => {
+  return (
+    <Provider store={store}>
+      <Content {...props} />
+    </Provider>
+  );
+};
 
 export default App;

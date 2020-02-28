@@ -1,67 +1,92 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
 import './style.scss';
-import protekt_white from '../../images/protekt_white.svg';
-import protekt_black from '../../images/protekt_black.svg';
+import protektWhite from '../../images/protekt_white.svg';
+import protektBlack from '../../images/protekt_black.svg';
 import Links from './Links';
 import { Authorization, Profile } from '../Types/GeneralTypes';
-import OakButton from '../Ux/OakButton';
+import OakButton from '../../oakui/OakButton';
 
-interface Props {    
-    sendEvent: Function,
-    getAuth: Function,
-    addAuth: Function,
-    removeAuth: Function,
-    authorization: Authorization
-    getProfile: Function,
-    profile: Profile,
-    login: Function,
-    transparent: boolean,
-    logout: Function,
-    toggleSettings: any
+interface Props {
+  sendEvent: Function;
+  getAuth: Function;
+  addAuth: Function;
+  removeAuth: Function;
+  authorization: Authorization;
+  getProfile: Function;
+  profile: Profile;
+  login: Function;
+  transparent: boolean;
+  logout: Function;
+  toggleSettings: any;
 }
 
-interface State {
-    showSettings: boolean
-}
+const Desktop = (props: Props) => {
+  useEffect(() => {
+    props.getProfile();
+  }, []);
 
-class Desktop extends Component<Props, State> {
-
-    constructor(props) {
-        super(props);
-        this.props.getProfile();
-        this.state = {
-            showSettings: false
-        }
-    }
-
-    signin = (type) => {
-        this.props.login(type);
-    }
-
-    render() {
-        return (
-            <div className={(this.props.transparent ? "navbar desktop transparent" : "navbar desktop")}>
-                <div className="left">
-                    {!this.props.transparent && this.props.profile.theme === 'theme_light' && <img className="logo" src={protekt_black} alt="Protekt logo" />}
-                    {(this.props.transparent || this.props.profile.theme === 'theme_dark') && <img className="logo" src={protekt_white} alt="Protekt logo" />}
-                    <Links authorization={this.props.authorization} profile={this.props.profile} />
-                </div>
-                <div className="right">
-                    <div className="action">
-                        {this.props.authorization.isAuth && 
-                            <OakButton theme="default" variant="outline" small action={this.props.toggleSettings}><i className="material-icons">brush</i>Appearance</OakButton>}
-                        {this.props.authorization.isAuth && 
-                            <OakButton theme="default" variant="outline" small action={this.props.logout()}><i className="material-icons">power_settings_new</i>Logout</OakButton>}
-                        {!this.props.authorization.isAuth && 
-                            <OakButton theme="default" variant="outline" small action={() => this.signin('signin')}><i className="material-icons">person</i>Login</OakButton>}
-                        {!this.props.authorization.isAuth && 
-                            <OakButton theme="default" variant="outline" small action={() => this.signin('signup')}><i className="material-icons">person_add</i>Signup</OakButton>}
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
+  return (
+    <div
+      className={
+        props.transparent ? 'navbar desktop transparent' : 'navbar desktop'
+      }
+    >
+      <div className="left">
+        {!props.transparent && props.profile.theme === 'theme_light' && (
+          <img className="logo" src={protektBlack} alt="Protekt logo" />
+        )}
+        {(props.transparent || props.profile.theme === 'theme_dark') && (
+          <img className="logo" src={protektWhite} alt="Protekt logo" />
+        )}
+        <Links authorization={props.authorization} profile={props.profile} />
+      </div>
+      <div className="right">
+        <div className="action">
+          {props.authorization.isAuth && (
+            <OakButton
+              theme="default"
+              variant="outline"
+              small
+              action={props.toggleSettings}
+            >
+              <i className="material-icons">brush</i>Appearance
+            </OakButton>
+          )}
+          {props.authorization.isAuth && (
+            <OakButton
+              theme="default"
+              variant="outline"
+              small
+              action={props.logout()}
+            >
+              <i className="material-icons">power_settings_new</i>Logout
+            </OakButton>
+          )}
+          {!props.authorization.isAuth && (
+            <OakButton
+              theme="default"
+              variant="outline"
+              small
+              action={() => props.login('signin')}
+            >
+              <i className="material-icons">person</i>Login
+            </OakButton>
+          )}
+          {!props.authorization.isAuth && (
+            <OakButton
+              theme="default"
+              variant="outline"
+              small
+              action={() => props.login('signup')}
+            >
+              <i className="material-icons">person_add</i>Signup
+            </OakButton>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Desktop;
