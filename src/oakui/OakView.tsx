@@ -7,12 +7,7 @@ interface Props {
 }
 
 const OakView = (props: Props) => {
-  return (
-    <div>
-      {/* {this.props} */}
-      {props.children}
-    </div>
-  );
+  return <div data-test="oak-view-root">{props.children}</div>;
 };
 
 export default OakView;

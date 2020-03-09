@@ -4,16 +4,15 @@ import { receiveMessage, sendMessage } from '../../events/MessageService';
 
 const Notification = () => {
   const [spinner, setSpinner] = useState(false);
-  const [notification, setNotification] = useState({
-    type: undefined,
-    message: undefined,
-  });
+  const [notification, setNotification] = useState<
+    { type?: string; message?: any } | undefined
+  >(undefined);
 
   useEffect(() => {
     const eventBus = receiveMessage().subscribe(message => {
       if (message.name === 'notification') {
         if (!message.signal) {
-          setNotification({ type: undefined, message: undefined });
+          setNotification(undefined);
         } else {
           setNotification(message.data);
           setSpinner(false);
@@ -41,7 +40,7 @@ const Notification = () => {
         </div>
       )}
       {spinner && (
-        <div className="lds-roller">
+        <div data-test="spinner" className="lds-roller">
           <div />
           <div />
           <div />

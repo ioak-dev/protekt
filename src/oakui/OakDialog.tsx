@@ -58,7 +58,11 @@ const OakDialog = (props: Props) => {
       >
         <div className={props.visible ? 'container' : 'container hidetext'}>
           <div className="dialog-header">
-            <div className="container" onClick={props.toggleVisibility}>
+            <div
+              className="container"
+              data-test="toggle-visibility"
+              onClick={props.toggleVisibility}
+            >
               <i className="material-icons">close</i>
               <div className="text-esc">esc</div>
             </div>

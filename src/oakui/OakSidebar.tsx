@@ -44,7 +44,7 @@ const OakSidebar = (props: Props) => {
     </div>
   ));
   return (
-    <div className="sidebar">
+    <div className="oak-sidebar">
       <div
         className={show ? 'header active' : 'header'}
         onClick={() => setShow(!show)}
@@ -64,6 +64,7 @@ const OakSidebar = (props: Props) => {
         </div>
       </div>
       <div
+        data-test="content-holder"
         className={
           show
             ? `content show ${props.animate ? 'animate in' : 'static'}`

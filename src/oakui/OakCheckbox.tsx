@@ -34,7 +34,7 @@ function OakCheckbox(props: Props) {
           <input
             type="checkbox"
             name={props.id}
-            checked={!!props.data[props.id]}
+            checked={props.data[props.id]}
             id={props.id}
             onChange={e => handleChange(e)}
           />
