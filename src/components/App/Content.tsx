@@ -2,13 +2,13 @@ import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import './style.scss';
 import { HashRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import { withCookies } from 'react-cookie';
 import { connect } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Home from '../Home';
 import BookmarkController from '../Bookmarks/BookmarkController';
 import NoteController from '../Notes/NoteController';
 import Login from '../Auth/Login';
-import PrivateRoute from '../Auth/PrivateRoute';
 import AuthInit from '../Auth/AuthInit';
 import { getAuth, addAuth, removeAuth } from '../../actions/AuthActions';
 import { getProfile } from '../../actions/ProfileActions';
@@ -20,14 +20,13 @@ import Settings from '../Settings';
 import { Authorization } from '../Types/GeneralTypes';
 import { sendMessage, receiveMessage } from '../../events/MessageService';
 import ResetPassword from '../Auth/ResetPassword';
+import OakRoute from '../Auth/OakRoute';
 
 const themes = {
-  themecolor1: getTheme('#C4005B'),
-  themecolor2: getTheme('#803BC2'),
-  themecolor3: getTheme('#E74443'),
-  themecolor4: getTheme('#29BE3B'),
-  themecolor5: getTheme('#ffe20f'),
-  themecolor6: getTheme('#4d4dff'),
+  themecolor1: getTheme('#69A7BF'),
+  themecolor2: getTheme('#99587B'),
+  themecolor3: getTheme('#A66C26'),
+  themecolor4: getTheme('#37AE82'),
 };
 
 function getTheme(color) {
@@ -49,6 +48,7 @@ interface Props {
   getAuth: Function;
   addAuth: Function;
   removeAuth: Function;
+  cookies: any;
   history: any;
 
   // event: PropTypes.object,
@@ -77,6 +77,10 @@ const Content = (props: Props) => {
     message = 'You have been logged out'
   ) => {
     props.removeAuth();
+    props.cookies.remove('isAuth');
+    props.cookies.remove('token');
+    props.cookies.remove('secret');
+    props.cookies.remove('name');
     sendMessage('notification', true, {
       type,
       message,
@@ -101,55 +105,82 @@ const Content = (props: Props) => {
                 exact
                 path="/"
                 render={propsLocal => (
-                  <Home {...props} {...propsLocal} logout={() => logout} />
+                  <OakRoute
+                    {...propsLocal}
+                    {...props}
+                    logout={() => logout}
+                    component={Home}
+                  />
                 )}
               />
               <Route
                 path="/home"
+                exact
                 render={propsLocal => (
-                  <Home {...props} {...propsLocal} logout={() => logout} />
+                  <OakRoute
+                    {...propsLocal}
+                    {...props}
+                    logout={() => logout}
+                    component={Home}
+                  />
                 )}
               />
               <Route
                 path="/login"
                 render={propsLocal => (
-                  <Login {...props} {...propsLocal} logout={() => logout} />
+                  <OakRoute
+                    {...propsLocal}
+                    {...props}
+                    logout={() => logout}
+                    component={Login}
+                  />
                 )}
               />
               <Route
                 path="/reset"
                 render={propsLocal => (
-                  <ResetPassword
-                    {...props}
+                  <OakRoute
                     {...propsLocal}
+                    {...props}
                     logout={() => logout}
+                    component={ResetPassword}
                   />
                 )}
               />
-              <PrivateRoute
+              <Route
                 path="/bookmarks"
                 render={propsLocal => (
-                  <BookmarkController
-                    {...props}
+                  <OakRoute
                     {...propsLocal}
-                    logout={logout}
+                    {...props}
+                    logout={() => logout}
+                    component={BookmarkController}
+                    middleware={['isAuthenticated']}
                   />
                 )}
               />
-              <PrivateRoute
+              <Route
                 path="/notes"
                 render={propsLocal => (
-                  <NoteController
-                    {...props}
+                  <OakRoute
                     {...propsLocal}
+                    {...props}
                     logout={() => logout}
+                    component={NoteController}
+                    middleware={['isAuthenticated']}
                   />
                 )}
               />
               <Route
                 path="/settings"
                 render={propsLocal => (
-                  <Settings {...props} {...propsLocal} logout={() => logout} />
+                  <OakRoute
+                    {...propsLocal}
+                    {...props}
+                    logout={() => logout}
+                    component={Settings}
+                    middleware={['isAuthenticated']}
+                  />
                 )}
               />
             </MuiThemeProvider>
@@ -170,4 +201,4 @@ export default connect(mapStateToProps, {
   addAuth,
   removeAuth,
   getProfile,
-})(Content);
+})(withCookies(Content));
