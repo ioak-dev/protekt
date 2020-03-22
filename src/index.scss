@@ -122,8 +122,6 @@ code {
     --color-palette-0: rgba(217, 217, 217, 1);
     --color-selected: rgba(217, 217, 217, 1);
     --color-hover: rgba(217, 217, 217, 0.2);
-    --color-white: white;
-    --color-black: black;
     --color-success: #437a34;
     --color-warning: #49a078;
     --color-failure: #8c030e;
@@ -136,11 +134,11 @@ code {
 
     --color-nav: #2a3036;
     --color-nav-shadow: rgba(252, 252, 252, 0.15);
-    --color-nav-text: var(--color-white);
+    --color-nav-text: var(--color-foreground-1);
     --color-nav-hover: rgba(239, 91, 91, 0.1);
     --color-nav-active: var(--color-palette-1);
     --color-nav-slider: var(--color-background-1);
-    --color-navitem-mobile: var(--color-white);
+    --color-navitem-mobile: var(--color-foreground-1);
 
     --color-btn-bg-palette-1: var(--color-palette-1);
     --color-btn-fg-palette-1: var(--color-foreground-1);
@@ -174,8 +172,6 @@ code {
     --color-palette-0: rgba(64, 64, 64, 1);
     --color-selected: rgba(64, 64, 64, 1);
     --color-hover: rgba(64, 64, 64, 0.2);
-    --color-white: white;
-    --color-black: black;
     --color-success: #437a34;
     --color-warning: #49a078;
     --color-failure: #8c030e;
@@ -188,11 +184,11 @@ code {
 
     --color-nav: #ececec;
     --color-nav-shadow: rgba(0, 0, 0, 0.15);
-    --color-nav-text: var(--color-black);
+    --color-nav-text: var(--color-foreground-1);
     --color-nav-hover: rgba(239, 91, 91, 0.1);
     --color-nav-active: var(--color-palette-1);
     --color-nav-slider: var(--color-background-1);
-    --color-navitem-mobile: var(--color-black);
+    --color-navitem-mobile: var(--color-foreground-1);
 
     --color-btn-bg-palette-1: var(--color-palette-1);
     --color-btn-fg-palette-1: var(--color-foreground-1);

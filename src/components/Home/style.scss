@@ -12,7 +12,7 @@
 
         /* For text formatting. */
         display: grid;
-        color: var(--color-white);
+        color: var(--color-foreground-1);
         align-content: center;
 
         @media (max-width: 767px) {
