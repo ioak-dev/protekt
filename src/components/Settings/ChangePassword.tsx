@@ -136,7 +136,7 @@ const ChangePassword = (props: Props) => {
       <div>
         <OakButton
           theme="secondary"
-          variant="animate in"
+          variant="appear"
           action={() => changePassword()}
         >
           Change Password

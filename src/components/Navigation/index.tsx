@@ -224,7 +224,7 @@ const Navigation = (props: Props) => {
         <div className="dialog-footer">
           <OakButton
             theme="primary"
-            variant="animate none"
+            variant="regular"
             action={() => toggleSettings()}
           >
             Close

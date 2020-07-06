@@ -92,7 +92,7 @@ const NoteItem = (props: Props) => {
           <OakButton
             action={() => props.setEditNote(true)}
             theme="secondary"
-            variant="animate in"
+            variant="appear"
             align="left"
           >
             <i className="material-icons">edit</i>Edit
@@ -100,7 +100,7 @@ const NoteItem = (props: Props) => {
           <OakButton
             action={() => setShowDeletePrompt(!showDeletePrompt)}
             theme="secondary"
-            variant="animate in"
+            variant="appear"
             align="right"
           >
             <i className="material-icons">delete</i>Delete
@@ -117,7 +117,7 @@ const NoteItem = (props: Props) => {
           <OakButton
             action={saveNote}
             theme="primary"
-            variant="animate in"
+            variant="appear"
             align="left"
           >
             <i className="material-icons">double_arrow</i>Save

@@ -74,7 +74,7 @@ const UserDetails = (props: Props) => {
       <div>
         <OakButton
           theme="secondary"
-          variant="animate in"
+          variant="appear"
           action={() => updateUserDetailsAction()}
         >
           Update details

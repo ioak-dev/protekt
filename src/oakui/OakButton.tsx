@@ -1,16 +1,21 @@
 import React, { ReactNode } from 'react';
-import './styles/oak-button-notch.scss';
+import { useSelector } from 'react-redux';
+import './styles/oak-button.scss';
+import OakIcon from './OakIcon';
 
 interface Props {
-  icon?: string;
+  icon?: string; // points to "mat" material icon
+  fa?: string;
+  svg?: string;
   action?: any;
   variant?:
     | 'block'
     | 'outline'
-    | 'animate in'
-    | 'animate out'
-    | 'animate none'
-    | 'disabled';
+    | 'appear'
+    | 'disappear'
+    | 'regular'
+    | 'disabled'
+    | 'drama';
   theme?: 'primary' | 'secondary' | 'tertiary' | 'default';
   align?: 'left' | 'right' | 'center';
   small?: boolean;
@@ -20,8 +25,10 @@ interface Props {
 }
 
 const OakButton = (props: Props) => {
+  const profile = useSelector(state => state.profile);
   const getStyle = () => {
     let style = props.theme ? props.theme : '';
+    style += profile?.theme?.includes('theme_light') ? ' light' : '';
     style += props.variant ? ` ${props.variant}` : '';
 
     if (!props.children) {
@@ -40,8 +47,12 @@ const OakButton = (props: Props) => {
   return (
     // eslint-disable-next-line react/button-has-type
     <button className={`oak-button ${getStyle()}`} onClick={props.action}>
-      {props.icon && <i className="material-icons">{props.icon}</i>}
-      {props.children && props.children}
+      <div className="button-label-container">
+        {props.icon && <OakIcon mat={props.icon} size="1.2em" />}
+        {props.fa && <OakIcon fa={props.fa} size="1.2em" />}
+        {props.svg && <OakIcon svg={props.svg} size="1.2em" />}
+        {props.children && props.children}
+      </div>
     </button>
   );
 };

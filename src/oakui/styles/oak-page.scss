@@ -1,0 +1,7 @@
+.oak-page {
+  height: calc(100vh - var(--height-nav));
+  min-height: calc(100vh - var(--height-nav));
+  overflow: auto;
+  background-color: var(--color-background-theme);
+  padding-top: var(--height-nav);
+}

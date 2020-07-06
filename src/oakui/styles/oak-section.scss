@@ -1,0 +1,29 @@
+.oak-section {
+  margin: 30px;
+  background-color: var(--color-background-2);
+  border-radius: 6px;
+  box-shadow: var(--bs-xl);
+  padding: 40px 60px;
+  animation: slideRight 0.1s cubic-bezier(0, 1, 0.5, 1);
+  @media (max-width: 767px) {
+    padding: 10px;
+    margin: 15px;
+  }
+  .app-text {
+    margin: auto;
+    width: 80%;
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+    word-break: break-word;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    transform: translateX(-30vh);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

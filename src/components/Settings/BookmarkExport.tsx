@@ -76,7 +76,7 @@ const BookmarkExport = (props: Props) => {
       <div className="space-top-2">
         <OakButton
           theme="secondary"
-          variant="animate in"
+          variant="appear"
           action={() => exportBookmark()}
         >
           Export

@@ -1,0 +1,44 @@
+.oak-subheading {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 4px;
+  justify-content: flex-start;
+  .heading-children {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .heading-highlight {
+    margin-top: 6px;
+    background-color: var(--color-primary-1);
+    height: 6px;
+    width: 40px;
+    border-radius: 4px;
+  }
+  .heading-links {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: flex-start;
+    column-gap: 20px;
+    align-items: center;
+  }
+}
+
+.oak-heading-link {
+  cursor: pointer;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  &:hover {
+    .material-icons {
+      color: var(--color-primary-1);
+    }
+  }
+  .heading-link-label {
+    color: var(--color-primary-1);
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

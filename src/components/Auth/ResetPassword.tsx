@@ -127,11 +127,7 @@ const ResetPassword = (props: Props) => {
             />
           </div>
           <br />
-          <OakButton
-            theme="primary"
-            variant="animate in"
-            action={changePassword}
-          >
+          <OakButton theme="primary" variant="appear" action={changePassword}>
             Submit
           </OakButton>
         </form>

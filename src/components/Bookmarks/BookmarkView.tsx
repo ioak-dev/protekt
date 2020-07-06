@@ -118,7 +118,7 @@ const BookmarkView = (props: Props) => {
           <OakButton
             action={props.update}
             theme="primary"
-            variant="animate in"
+            variant="appear"
             align="right"
           >
             <i className="material-icons">double_arrow</i>Save
@@ -219,7 +219,7 @@ const BookmarkView = (props: Props) => {
                     <OakButton
                       action={props.search}
                       theme="primary"
-                      variant="animate in"
+                      variant="appear"
                     >
                       Search
                     </OakButton>

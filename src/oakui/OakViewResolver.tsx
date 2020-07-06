@@ -76,7 +76,7 @@ const OakViewResolver = (props: Props) => {
               <div>
                 <OakButton
                   theme="default"
-                  variant="disabled"
+                  variant="block"
                   action={toggleSideView}
                 >
                   {!showSide && (

@@ -1,0 +1,40 @@
+.oak-section {
+  margin: 30px;
+  // padding: 40px 60px;
+  animation: pageTransition 500ms cubic-bezier(0, 1, 0.5, 1);
+  @media (max-width: 767px) {
+    //   padding: 10px;
+    margin: 15px;
+  }
+  .app-text {
+    margin: auto;
+    width: 80%;
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+    word-break: break-word;
+  }
+}
+
+@keyframes pageTransition {
+  0% {
+    // transform: translateY(5vh);
+    transform: rotateX(60deg) translateX(1vw);
+    opacity: 0;
+  }
+  100% {
+    // transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pageTransitionMoveUp {
+  0% {
+    transform: translateY(2vh);
+    opacity: 0;
+  }
+  100% {
+    // transform: translateY(0);
+    opacity: 1;
+  }
+}

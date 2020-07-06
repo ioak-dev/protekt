@@ -1,17 +1,30 @@
 import * as React from 'react';
-import { shallow } from 'enzyme';
-
+import { Provider } from 'react-redux';
+import { shallow, mount } from 'enzyme';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import OakButton from './OakButton';
 
+const mockStore = configureMockStore([thunk]);
+
+const store = mockStore({ profile: { theme: ['theme_light'] } });
 describe('button component interaction', () => {
   it('should load when initialized', () => {
-    const wrapper = shallow(<OakButton />);
+    const wrapper = mount(
+      <Provider store={store}>
+        <OakButton />
+      </Provider>
+    );
     expect(wrapper.find('.oak-button')).toHaveLength(1);
   });
 
   it('should invoke the callback function when clicked', () => {
     const mockAction = jest.fn();
-    const wrapper = shallow(<OakButton action={mockAction} />);
+    const wrapper = mount(
+      <Provider store={store}>
+        <OakButton action={mockAction} />
+      </Provider>
+    );
     expect(mockAction.mock.calls.length).toEqual(0);
     wrapper.find('button').simulate('click');
     expect(mockAction.mock.calls.length).toEqual(1);
@@ -22,55 +35,82 @@ describe('button component interaction', () => {
 
 describe('button component conditional styling', () => {
   it('should have choosen theme', () => {
-    const wrapperWithPrimaryTheme = shallow(<OakButton theme="primary" />);
-    expect(wrapperWithPrimaryTheme.hasClass('primary')).toBeTruthy();
-    expect(wrapperWithPrimaryTheme.hasClass('default')).toBeFalsy();
-    const wrapperWithDefaultTheme = shallow(<OakButton theme="default" />);
-    expect(wrapperWithDefaultTheme.hasClass('primary')).toBeFalsy();
-    expect(wrapperWithDefaultTheme.hasClass('default')).toBeTruthy();
-    const wrapperWithNoTheme = shallow(<OakButton />);
-    expect(wrapperWithNoTheme.hasClass('primary')).toBeFalsy();
-    expect(wrapperWithNoTheme.hasClass('default')).toBeFalsy();
+    const wrapperWithPrimaryTheme = mount(
+      <Provider store={store}>
+        <OakButton theme="primary" />
+      </Provider>
+    );
+    expect(
+      wrapperWithPrimaryTheme.find('.oak-button').hasClass('primary')
+    ).toBeTruthy();
+    expect(
+      wrapperWithPrimaryTheme.find('.oak-button').hasClass('default')
+    ).toBeFalsy();
+    const wrapperWithDefaultTheme = mount(
+      <Provider store={store}>
+        <OakButton theme="default" />
+      </Provider>
+    );
+    expect(
+      wrapperWithDefaultTheme.find('.oak-button').hasClass('primary')
+    ).toBeFalsy();
+    expect(
+      wrapperWithDefaultTheme.find('.oak-button').hasClass('default')
+    ).toBeTruthy();
+    const wrapperWithNoTheme = mount(
+      <Provider store={store}>
+        <OakButton />
+      </Provider>
+    );
+    expect(
+      wrapperWithNoTheme.find('.oak-button').hasClass('primary')
+    ).toBeFalsy();
+    expect(
+      wrapperWithNoTheme.find('.oak-button').hasClass('default')
+    ).toBeFalsy();
   });
 
   it('should render child elements as label', () => {
-    const wrapper = shallow(<OakButton>Test label</OakButton>);
-    expect(wrapper.text()).toEqual('Test label');
-  });
-
-  it('should render material icon as label when icon property is passed', () => {
-    const wrapper = shallow(<OakButton icon="search" />);
-    expect(
-      wrapper
-        .find('.oak-button')
-        .children()
-        .hasClass('material-icons')
-    ).toBeTruthy();
-    expect(
-      wrapper
-        .find('.material-icons')
-        .children()
-        .text()
-    ).toEqual('search');
+    const wrapper = mount(
+      <Provider store={store}>
+        <OakButton>Test label</OakButton>
+      </Provider>
+    );
+    expect(wrapper.find('.oak-button').text()).toEqual('Test label');
   });
 
   it('should align the text to direction passed as input', () => {
-    const wrapper = shallow(<OakButton align="left" />);
-    expect(wrapper.hasClass('align-left')).toBeTruthy();
-    expect(wrapper.hasClass('align-right')).toBeFalsy();
+    const wrapper = mount(
+      <Provider store={store}>
+        <OakButton align="left" />
+      </Provider>
+    );
+    expect(wrapper.find('.oak-button').hasClass('align-left')).toBeTruthy();
+    expect(wrapper.find('.oak-button').hasClass('align-right')).toBeFalsy();
   });
 
   it('should render the chosen variant', () => {
-    const wrapper = shallow(<OakButton variant="animate in" />);
-    expect(wrapper.hasClass('animate')).toBeTruthy();
-    expect(wrapper.hasClass('in')).toBeTruthy();
-    expect(wrapper.hasClass('outline')).toBeFalsy();
+    const wrapper = mount(
+      <Provider store={store}>
+        <OakButton variant="appear" />
+      </Provider>
+    );
+    expect(wrapper.find('.oak-button').hasClass('appear')).toBeTruthy();
+    expect(wrapper.find('.oak-button').hasClass('outline')).toBeFalsy();
   });
 
   it('should render as small button when small is passed as input', () => {
-    const smallWrapper = shallow(<OakButton small />);
-    const normalWrapper = shallow(<OakButton />);
-    expect(smallWrapper.hasClass('small')).toBeTruthy();
-    expect(normalWrapper.hasClass('small')).toBeFalsy();
+    const smallWrapper = mount(
+      <Provider store={store}>
+        <OakButton small />
+      </Provider>
+    );
+    const normalWrapper = mount(
+      <Provider store={store}>
+        <OakButton />
+      </Provider>
+    );
+    expect(smallWrapper.find('.oak-button').hasClass('small')).toBeTruthy();
+    expect(normalWrapper.find('.oak-button').hasClass('small')).toBeFalsy();
   });
 });

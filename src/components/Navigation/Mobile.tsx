@@ -90,7 +90,7 @@ const Mobile = (props: Props) => {
               {!props.authorization.isAuth && (
                 <OakButton
                   theme="secondary"
-                  variant="animate none"
+                  variant="regular"
                   small
                   action={() => props.login('signin')}
                 >
@@ -100,7 +100,7 @@ const Mobile = (props: Props) => {
               {!props.authorization.isAuth && (
                 <OakButton
                   theme="secondary"
-                  variant="animate none"
+                  variant="regular"
                   small
                   action={() => props.login('signup')}
                 >

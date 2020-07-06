@@ -255,11 +255,7 @@ const Login = (props: Props) => {
               />
             </div>
             <br />
-            <OakButton
-              theme="primary"
-              variant="animate in"
-              action={signinAction}
-            >
+            <OakButton theme="primary" variant="appear" action={signinAction}>
               Sign In
             </OakButton>
             <br />
@@ -302,11 +298,7 @@ const Login = (props: Props) => {
               />
             </div>
             <br />
-            <OakButton
-              theme="primary"
-              variant="animate in"
-              action={signupAction}
-            >
+            <OakButton theme="primary" variant="appear" action={signupAction}>
               Create account
             </OakButton>
             <br />

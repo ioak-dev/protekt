@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import './styles/oak-select-notch.scss';
+import './styles/oak-select.scss';
 
 interface Props {
   id: string;
   label?: string;
-  handleChange: Function;
+  handleChange: any;
   error?: boolean;
   data: any;
   elements?: string[];
@@ -59,53 +59,37 @@ const OakSelect = (props: Props) => {
   }
 
   return (
-    <>
-      <div className={`oak-select ${getStyle()}`}>
-        {props.label && <label htmlFor={props.id}>{props.label}</label>}
-        <div
-          className="select-button"
-          id={props.id}
-          onClick={() => setShow(!show)}
+    <div className="oak-select">
+      <select
+        onChange={props.handleChange}
+        name={props.id}
+        className="select"
+        value={props.data[props.id]}
+      >
+        <option value=""> </option>
+        {props.firstAction && (
+          <option value={props.firstAction}>{props.firstAction}</option>
+        )}
+        {props.elements?.map(item => (
+          <option value={item} key={item}>
+            {item}
+          </option>
+        ))}
+        {props.objects?.map(item => (
+          <option value={item.key} key={item.key}>
+            {item.value}
+          </option>
+        ))}
+      </select>
+      {props.label && (
+        <label
+          htmlFor={props.id}
+          className={props.data[props.id] ? 'active' : ''}
         >
-          {props.elements && <div>{props.data[props.id]}</div>}
-          {props.objects && (
-            <div>
-              {props.objects.find(
-                element => element.key === props.data[props.id]
-              ) &&
-                props.objects?.find(
-                  element => element.key === props.data[props.id]
-                ).value}
-            </div>
-          )}
-          {/* {this.props.objects && <div>{this.props.objects[0].value}</div>} */}
-          <div>
-            <i className="material-icons">keyboard_arrow_down</i>
-          </div>
-        </div>
-        <div className={show ? 'dropdown show' : 'dropdown hide'}>
-          <div className="dropdown-content">
-            {props.first && (
-              <div
-                className="option"
-                onClick={e => changeSelection(e, props.first)}
-              >
-                {props.first}
-              </div>
-            )}
-            {props.firstAction && (
-              <div
-                className="option"
-                onClick={e => changeSelection(e, props.firstAction)}
-              >
-                {props.firstAction}
-              </div>
-            )}
-            {dropdownList}
-          </div>
-        </div>
-      </div>
-    </>
+          {props.label}
+        </label>
+      )}
+    </div>
   );
 };
 
