@@ -63,6 +63,7 @@ const OakPagination = (props: Props) => {
       <div className="page-nav">
         <div className="space-right-2">
           <i
+            data-test="action-page-previous"
             className={
               data.pageNo === 1 ? 'material-icons disabled' : 'material-icons'
             }
@@ -73,6 +74,7 @@ const OakPagination = (props: Props) => {
         </div>
         <div>
           <i
+            data-test="action-page-next"
             className={
               Math.ceil(props.totalRows / data.rowsPerPage) === data.pageNo
                 ? 'material-icons disabled'

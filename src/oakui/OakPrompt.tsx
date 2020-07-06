@@ -44,6 +44,7 @@ const OakPrompt = (props: Props) => {
         {!props.children && (
           <>
             <OakButton
+              data-test="action-close"
               action={props.toggleVisibility}
               theme="default"
               variant="animate in"
@@ -52,6 +53,7 @@ const OakPrompt = (props: Props) => {
               <i className="material-icons">close</i>No
             </OakButton>
             <OakButton
+              data-test="action-proceed"
               action={action}
               theme="primary"
               variant="animate out"

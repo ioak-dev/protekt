@@ -10,14 +10,14 @@
         padding-top: 100px;
         text-transform: uppercase;
         cursor: pointer;
-        border: 2px solid var(--color-btn-secondary-bg);
+        border: 2px solid var(--color-btn-bg-palette-2);
         padding: 8px 16px;
         font-size: 0.9em;
         clip-path: polygon(0 var(--clip-radius), 10px 0, 100% 0, 100% calc(100% - var(--clip-radius)), calc(100% - var(--clip-radius)) 100%, 0 100%);
-        color: var(--color-btn-secondary-fg) !important;
+        color: var(--color-btn-fg-palette-2) !important;
         &:hover {
-          color: var(--color-btn-secondary-fg-hover) !important;
-          background-color: var(--color-btn-secondary-bg) !important;
+          color: var(--color-btn-fg-palette-2-hover) !important;
+          background-color: var(--color-btn-bg-palette-2) !important;
           transition: 0.2s cubic-bezier(.5,1.6,.4,.7);
         }
     }
@@ -34,7 +34,7 @@
         cursor: pointer;
 
         &.active {
-            color: var(--color-secondary);
+            color: var(--color-palette-2);
         }
 
         &.size-1 {

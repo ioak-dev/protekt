@@ -44,6 +44,7 @@ const BookmarkItem = (props: Props) => {
           </div>
           <div className="item-edit">
             <i
+              data-test="bookmark-edit"
               onClick={() => props.editBookmark(props.bookmark)}
               className="material-icons"
             >

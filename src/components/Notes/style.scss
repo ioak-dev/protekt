@@ -31,7 +31,7 @@
         cursor: pointer;
         display: inline;
         padding-left: 10px;
-        color: var(--color-primary);
+        color: var(--color-palette-1);
     }
 
     .form {
@@ -52,7 +52,7 @@
         }
 
         .detail {
-            color: var(--color-body-invert-dim);
+            color: var(--color-foreground-2);
             font-size: 14px;
         }
 
@@ -71,22 +71,22 @@
         }
         
         &.selected {
-            // background-color: var(--color-primary);
+            // background-color: var(--color-palette-1);
             background-color: var(--color-selected);
 
             .title {
-                color: var(--color-body);
+                color: var(--color-background-1);
             }
 
             .detail {
-                color: var(--color-body-dim);
+                color: var(--color-background-2);
             }
         }
 
         transition: all 0.1s ease-in-out;
 
         &::after {
-            background-color: var(--color-body-dim);
+            background-color: var(--color-background-2);
             border-radius: 3px;
             content: '';
             display: block;
@@ -127,7 +127,7 @@
     }
 
     .notebook {
-        background-color: var(--color-body-dim);
+        background-color: var(--color-background-2);
         display: inline;
         margin-right: 5px;
         padding: 0px 4px 2px 4px;
@@ -149,7 +149,7 @@
         position: absolute;
         left: 0px;
         top: var(--height-nav);
-        background-color: var(--color-body);
+        background-color: var(--color-background-1);
         padding-left: 10px;
     }
 }
