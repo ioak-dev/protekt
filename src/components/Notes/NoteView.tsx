@@ -11,6 +11,7 @@ import OakButton from '../../oakui/OakButton';
 import { receiveMessage, sendMessage } from '../../events/MessageService';
 import OakSelect from '../../oakui/OakSelect';
 import NoteLink from './NoteLink';
+import OakEditor from '../../oakui/OakEditor';
 
 const sortTypes = [
   { key: 'createdAt', value: 'created' },
@@ -151,11 +152,10 @@ const NoteView = (props: Props) => {
             />
           </div>
           <div>
-            <OakText
-              label="Content (Markdown / HTML / Plaintext)"
+            <OakEditor
+              label="Content"
               data={props.note}
               id="content"
-              multiline
               handleChange={e => props.handleNoteDataChange(e)}
             />
           </div>

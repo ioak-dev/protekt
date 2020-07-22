@@ -31,7 +31,7 @@ const NoteController = (props: Props) => {
     notebook: '',
     newNotebook: '',
   };
-  const [note, setNote] = useState(emptyNote);
+  const [note, setNote] = useState<any>(emptyNote);
 
   const [searchPref, setSearchPref] = useState({
     title: true,
@@ -254,7 +254,7 @@ const NoteController = (props: Props) => {
   };
 
   const handleNoteDataChange = event => {
-    setNote({ ...note, [event.currentTarget.name]: event.currentTarget.value });
+    setNote({ ...note, [event.target.name]: event.target.value });
   };
 
   const handleSearchPrefDataChange = event => {

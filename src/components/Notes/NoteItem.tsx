@@ -4,6 +4,7 @@ import OakSelect from '../../oakui/OakSelect';
 import OakText from '../../oakui/OakText';
 import OakButton from '../../oakui/OakButton';
 import OakPrompt from '../../oakui/OakPrompt';
+import OakEditor from '../../oakui/OakEditor';
 
 interface Props {
   note: any;
@@ -16,36 +17,35 @@ interface Props {
 }
 
 const NoteItem = (props: Props) => {
-  const flags = [
-    {
-      key: 'one',
-      value: <div className="select-palette one" />,
-    },
-    {
-      key: 'two',
-      value: <div className="select-palette two" />,
-    },
-    {
-      key: 'three',
-      value: <div className="select-palette three" />,
-    },
-    {
-      key: 'four',
-      value: <div className="select-palette four" />,
-    },
-    {
-      key: 'five',
-      value: <div className="select-palette five" />,
-    },
-    {
-      key: 'six',
-      value: <div className="select-palette six" />,
-    },
-  ];
+  // const flags = [
+  //   {
+  //     key: 'one',
+  //     value: <div className="select-palette one" />,
+  //   },
+  //   {
+  //     key: 'two',
+  //     value: <div className="select-palette two" />,
+  //   },
+  //   {
+  //     key: 'three',
+  //     value: <div className="select-palette three" />,
+  //   },
+  //   {
+  //     key: 'four',
+  //     value: <div className="select-palette four" />,
+  //   },
+  //   {
+  //     key: 'five',
+  //     value: <div className="select-palette five" />,
+  //   },
+  //   {
+  //     key: 'six',
+  //     value: <div className="select-palette six" />,
+  //   },
+  // ];
 
   const [showDeletePrompt, setShowDeletePrompt] = useState(false);
   const [preview, setPreview] = useState(true);
-  const [newNotebook, setNewNotebook] = useState('');
 
   const deleteNote = () => {
     props.deleteNote(props.note._id || props.note.id);
@@ -161,16 +161,6 @@ const NoteItem = (props: Props) => {
 
           <div>
             <OakSelect
-              width="width-25"
-              label="Flag"
-              data={props.note}
-              id="flag"
-              handleChange={e => props.handleChange(e)}
-              objects={flags}
-            />
-          </div>
-          <div>
-            <OakSelect
               label="Notebook"
               data={props.note}
               id="notebook"
@@ -205,11 +195,10 @@ const NoteItem = (props: Props) => {
           {preview && (
             <div className="edit-note-view">
               <div>
-                <OakText
-                  label="Content (Markdown / HTML / Plaintext)"
+                <OakEditor
+                  label="Content"
                   data={props.note}
                   id="content"
-                  multiline
                   handleChange={e => props.handleChange(e)}
                 />
               </div>
@@ -220,11 +209,10 @@ const NoteItem = (props: Props) => {
             </div>
           )}
           {!preview && (
-            <OakText
-              label="Content (Markdown / HTML / Plaintext)"
+            <OakEditor
+              label="Content"
               data={props.note}
               id="content"
-              multiline
               handleChange={e => props.handleChange(e)}
             />
           )}
